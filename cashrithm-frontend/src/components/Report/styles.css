@@ -1,0 +1,495 @@
+.main__dashboard {
+  width: 100%;
+  margin: 0 0 2rem 0;
+  /*border: 1px solid black;*/
+}
+
+.report__list--container {
+  display: grid;
+  grid-template-columns: 15% 85%;
+}
+
+
+.report-list {
+  background-color: #f0f0f0;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-gap: 1.5rem;
+}
+
+.report {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  width: 85%;
+  margin: 2rem auto;
+  /*border: 1px solid black;*/
+}
+
+.records-container {
+  width: 80%;
+  padding: 3rem 0 0 0;
+  /*border: 1px solid black;*/
+}
+
+.records-container div {
+  padding: 0.5rem;
+  background-color: white;
+  color: black;
+  font: 20px "Futura";
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+  text-decoration: none;
+  margin-bottom: 1em;
+}
+
+.records-container div:nth-child(1) {
+  font-weight: 700;
+}
+.records-container div:nth-child(2) {
+  font-weight: 700;
+}
+
+.big__header {
+  text-align: center;
+}
+
+.sub__big__header {
+  text-align: left;
+  padding: 0 0 0 2rem;
+  margin: .8rem 0;
+  font-weight: 700;
+}
+
+.category__vendor {
+  padding: 0 0 0 2.5rem;
+  margin: 0 0 .5rem 0;
+  text-align: left;
+  font-size: .8rem;
+}
+
+.revenue-figure {
+  color: #ed4040;
+}
+.expense-figure {
+  color: #5840ed;
+}
+
+.record {
+  width: 85%;
+  height: fit-content;
+  background-color: white;
+  border-radius: 10px;
+  /*padding: 1rem 0 1rem 1.5rem;*/
+  margin: 0.5rem 0.5rem;
+  cursor: pointer;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+}
+.record:hover,
+.records-container a:hover {
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 25%);
+}
+
+.record h2 {
+  font: 30px "Futura";
+  font-weight: 700;
+}
+
+.record p {
+  font-weight: 700;
+}
+
+.record p span {
+  padding: 0 0 0 1rem;
+}
+
+.report-list a,
+.report-list a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+h4 {
+  font: 20px "Futura";
+}
+
+
+/* adding  */
+form {
+  /*margin-top: 7em;*/
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add-report h3 {
+  font: 40px "Futura";
+}
+
+.add-report input {
+  margin-top: 2em;
+  width: 30em;
+  padding: 20px 0px 20px 30px;
+  background-color: #f0f0f0;
+  border: #f0f0f0 solid 1px;
+  border-radius: 44px;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+}
+
+.dropzone {
+  margin-top: 1em;
+  width: 30em;
+  color: #000;
+  background-color: #f0f0f0;
+  border: #f0f0f0 solid 1px;
+  text-align: left;
+  padding: 15px 0px 0px 30px;
+  border-radius: 44px;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+}
+
+.dropzone:hover,
+input:hover {
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 25%);
+}
+
+::placeholder {
+  color: #000;
+}
+
+.dropzone:focus,
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 25%);
+}
+
+.add-report button {
+  padding: 15px 40px;
+  color: #fff;
+  background-color: #00a55a;
+  border: #00a55a solid 1px;
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 17%);
+  margin-top: 1em;
+}
+
+.add-report button:hover {
+  cursor: pointer;
+  background-color: #00803c;
+  border: #00803c solid 1px;
+}
+
+.import-csv ul li {
+  text-align: left;
+}
+
+.summary-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.summary-container .back {
+  width: 100%;
+  padding-left: 5em;
+  padding-top: 2em;
+  align-items: left;
+  text-align: left;
+  text-decoration: none;
+}
+.summary-container a,
+.summary-container a:visited {
+  text-decoration: none;
+  color: black;
+  line-height: 150%;
+}
+.summary-container a:hover {
+  border-bottom: 1px solid;
+}
+
+.summary-header {
+  flex-direction: row;
+  flex: 1 1;
+}
+
+.summary-title {
+  width: 50%;
+  font: 30px "Futura";
+  line-height: 200%;
+  text-align: center;
+}
+
+.summary {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.summary .left {
+  text-align: left;
+}
+.summary .right {
+  text-align: right;
+}
+
+
+@media screen and (max-width: 768px) {
+  .main__dashboard {
+    width: 100%;
+    margin: 0 0 2rem 0;
+    /*border: 1px solid black;*/
+  }
+  
+  .report__list--container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  
+  
+  .report-list {
+    background-color: #f0f0f0;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  
+  .report {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: .1rem;
+    width: 100%;
+    margin: 2rem auto;
+    align-content: center;
+    /*border: 1px solid black;*/
+  }
+  
+  .records-container {
+    width: 90%;
+    margin: 3rem auto 0;
+    /*padding: 3rem 0 0 0;*/
+    /*border: 1px solid black;*/
+  }
+  
+  .records-container div {
+    padding: 0.5rem;
+    background-color: white;
+    color: black;
+    font: 18px "Futura";
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+    text-decoration: none;
+    margin-bottom: 1em;
+  }
+  
+  .records-container div:nth-child(1) {
+    font-weight: 700;
+  }
+  .records-container div:nth-child(2) {
+    font-weight: 700;
+  }
+  
+  .big__header {
+    text-align: center;
+  }
+  
+  .sub__big__header {
+    text-align: left;
+    padding: 0 0 0 2rem;
+    margin: .8rem 0;
+    font-weight: 700;
+  }
+  
+  .category__vendor {
+    padding: 0 0 0 2.5rem;
+    margin: 0 0 .5rem 0;
+    text-align: left;
+    font-size: .8rem;
+  }
+  
+  .revenue-figure {
+    color: #ed4040;
+  }
+  .expense-figure {
+    color: #5840ed;
+  }
+  
+  .record {
+    width: 90%;
+    height: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    /*padding: 1rem 0 1rem 1.5rem;*/
+    margin: 0.5rem 0.5rem;
+    cursor: pointer;
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+  }
+  .record:hover,
+  .records-container a:hover {
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 25%);
+  }
+  
+  .record h2 {
+    font: 25px "Futura";
+    font-weight: 700;
+  }
+  
+  .record p {
+    font-weight: 700;
+    font-size: .8rem;
+  }
+  
+  .record p span {
+    padding: 0 0 0 1rem;
+  }
+  
+  .report-list a,
+  .report-list a:visited {
+    text-decoration: none;
+    color: black;
+  }
+  
+  h4 {
+    font: 20px "Futura";
+  }
+  
+  
+  /* adding  */
+  form {
+    /*margin-top: 7em;*/
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .add-report h3 {
+    font: 40px "Futura";
+  }
+  
+  .add-report input {
+    margin-top: 2em;
+    width: 30em;
+    padding: 20px 0px 20px 30px;
+    background-color: #f0f0f0;
+    border: #f0f0f0 solid 1px;
+    border-radius: 44px;
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+  }
+  
+  .dropzone {
+    margin-top: 1em;
+    width: 30em;
+    color: #000;
+    background-color: #f0f0f0;
+    border: #f0f0f0 solid 1px;
+    text-align: left;
+    padding: 15px 0px 0px 30px;
+    border-radius: 44px;
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+  }
+  
+  .dropzone:hover,
+  input:hover {
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 25%);
+  }
+  
+  ::placeholder {
+    color: #000;
+  }
+  
+  .dropzone:focus,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 25%);
+  }
+  
+  .add-report button {
+    padding: 15px 40px;
+    color: #fff;
+    background-color: #00a55a;
+    border: #00a55a solid 1px;
+    border-radius: 50px;
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 17%);
+    margin-top: 1em;
+  }
+  
+  .add-report button:hover {
+    cursor: pointer;
+    background-color: #00803c;
+    border: #00803c solid 1px;
+  }
+  
+  .import-csv ul li {
+    text-align: left;
+  }
+  
+  .summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    background-color: #ffffff;
+    min-height: 100vh;
+  }
+  
+  .summary-container .back {
+    width: 100%;
+    padding-left: 5em;
+    padding-top: 2em;
+    align-items: left;
+    text-align: left;
+    text-decoration: none;
+  }
+  .summary-container a,
+  .summary-container a:visited {
+    text-decoration: none;
+    color: black;
+    line-height: 150%;
+  }
+  .summary-container a:hover {
+    border-bottom: 1px solid;
+  }
+  
+  .summary-header {
+    flex-direction: row;
+    flex: 1 1;
+  }
+  
+  .summary-title {
+    width: 50%;
+    font: 30px "Futura";
+    line-height: 200%;
+    text-align: center;
+  }
+  
+  .summary {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .summary .left {
+    text-align: left;
+  }
+  .summary .right {
+    text-align: right;
+  }
+
+}

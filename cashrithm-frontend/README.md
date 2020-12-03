@@ -1,0 +1,3 @@
+# Cashrithm
+
+### `yarn start`
