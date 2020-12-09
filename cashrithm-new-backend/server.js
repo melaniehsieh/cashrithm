@@ -23,8 +23,18 @@ dotenv.config();
 
 const app = express();
 
+app.enable('trust proxy');
+
 // Cross origin
 app.use(cors());
+
+// Setting http headers
+app.use(helmet());
+
+// Parsing Incoming data
+app.use(express.json({limit: "10kb"}));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use(cookieParser());
 
 // Rate limiter functionality
 let loginSignupLimiterObject = {
@@ -49,13 +59,6 @@ app.use("/api", generalLimiter);
 app.use("/api/v1/user/signup", loginSignupLimiter);
 app.use("/api/v1/user/login", loginSignupLimiter);
 
-
-
-// Parsing Incoming data
-app.use(express.json({limit: "10kb"}));
-app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-app.use(cookieParser())
-
 // Mongoose sanitize
 app.use(mongoSanitize());
 
@@ -65,9 +68,6 @@ app.use(xss());
 // Morgan for Development
 if(process.env.NODE_ENV === "development") app.use(morgan('dev'));
 
-// Setting http headers
-app.use(helmet());
-
 // Test middleware
 app.use((req, res, next) => {
   //console.log(req.headers);
@@ -76,6 +76,12 @@ app.use((req, res, next) => {
   console.log("req.header");
   console.log(req.headers);
   console.log(req.app);*/
+  /*console.log("res");
+  console.log(res);
+  console.log(res.cookies);
+  console.log("req");
+  console.log(req.cookies);
+  console.log(req.cookies.token);*/
   next();
 });
 

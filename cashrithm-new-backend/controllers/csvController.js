@@ -42,13 +42,13 @@ const upload = multer({
 
 exports.uploadCSV = upload.single('csv');
 
-const transformedData = (data) => {
+const transformedData = (data, type) => {
   return data.map((el) => {
     return Object.fromEntries(
       Object.entries(el).map(([key, value]) => {
         //key = "type";
         if(key === "_id") {
-          key = "vendor";
+          key = `${type}Vendor`;
         }
         return [key, value];
       })
@@ -67,7 +67,7 @@ const calcTotalExpense = async (userId, csvId) => {
     } }
   ]);
   
-  return transformedData(data);
+  return transformedData(data, "expense");
 };
 
 const calcTotalRevenue = async (userId, csvId) => {
@@ -81,7 +81,7 @@ const calcTotalRevenue = async (userId, csvId) => {
     } }
   ]);
   
-  return transformedData(data);
+  return transformedData(data, "revenue");
 };
 
 const transformTransactionDoc = (el, req, num) => {
@@ -107,6 +107,19 @@ const transformTransactionDoc = (el, req, num) => {
   return transformedData;
 };
 
+const updateUserTransaction = wrapAsync(async (data, req, next) => {
+  const userEntities = await Entities.findOne({user:req.user._id});
+  
+  const y = await Entities.findByIdAndUpdate(userEntities._id, {
+    $push: {transaction: data}
+ }, {
+    new: true,
+    runValidators: true
+  });
+  
+  return y;
+});
+/*
 const updateCurrentUserRevenue = wrapAsync(async (datRevenue, req, next) => {
   const userEntities = await Entities.findOne({user:req.user._id});
   
@@ -128,7 +141,7 @@ const updateCurrentUserExpense = wrapAsync(async (datExpense, req, next) => {
     runValidators: true
   });
 });
-
+*/
 const calcAndUpdateCurrentCategory = wrapAsync(async (req) => {
    const data = await CategoryCSV.aggregate([
       { $match: { user: req.user._id } },
@@ -138,7 +151,7 @@ const calcAndUpdateCurrentCategory = wrapAsync(async (req) => {
         vendors: { $addToSet: "$vendor" }
       } }
     ]);
-     
+     console.log(data);
      // Transformed the data by setting the "_id" property to "type"
     const transformedData = data.map((el) => {
       return Object.fromEntries(
@@ -151,18 +164,77 @@ const calcAndUpdateCurrentCategory = wrapAsync(async (req) => {
         })
       );
     });
-   
+   //console.log(transformedData);
    // Retrieve the current user Entities from the currently logged in user
     const userEntities = await Entities.findOne({user:req.user._id});
    
    // Update the current user entities object with the transformed category data
     const updatedEntities = await Entities.findByIdAndUpdate(userEntities._id, {
-     category: transformedData
+      category: transformedData
+      //$push: {category: transformedData}
    }, {
      new: true,
      runValidators: true
    });
 });
+
+const transformDataFunc = (data) => {
+  return data.map((el) => {
+    return Object.fromEntries(
+      Object.entries(el).map(([key, value]) => {
+        //key = "type";
+        if(key === "_id") {
+          key = "type";
+        }
+        return [key, value];
+      })
+    );
+  });
+};
+
+
+const calculateAndUpdateTotalRevenueExpense = async (req, csvId) => {
+  const totalRevenue = await CSV.aggregate([
+    { $match: { select: "revenue", user: req.user._id, csvId } },
+    { $group: {
+      _id: "$select",
+      //_id: "$vendor",
+      allTotalRevenue: {$sum: "$amount"}
+      //numberDoc: {$sum: 1}
+    } }
+  ]);
+  
+  const totalExpense = await CSV.aggregate([
+    { $match: { select: "expense", user: req.user._id, csvId } },
+    { $group: {
+      _id: "$select",
+      //_id: "$vendor",
+      allTotalExpense: {$sum: "$amount"}
+      //numberDoc: {$sum: 1}
+    } }
+  ]);
+  
+  // Transform total Revenue
+  const dt1 = transformDataFunc(totalRevenue);
+  
+  // Transform total Expense
+  const dt2 = transformDataFunc(totalExpense);
+    
+  const combinedData = {...dt1[0], ...dt2[0]}
+  return combinedData;
+  //console.log(combinedData);
+  /*
+   // Retrieve the current user Entities from the currently logged in user
+    const userEntities = await Entities.findOne({user:req.user._id});
+   
+   // Update the current user entities object with the transformed category data
+    const updatedEntities = await Entities.findByIdAndUpdate(userEntities._id, {
+      $push: {totalRevenueExpense: combinedData}
+   }, {
+     new: true,
+     runValidators: true
+   });*/
+};
 
 exports.uploadTransactionCsv = wrapAsync(async (req, res, next) => {
     if(!req.file) {
@@ -194,27 +266,45 @@ exports.uploadTransactionCsv = wrapAsync(async (req, res, next) => {
     
     // Insert all the csv file parsed
     const doc = await CSV.insertMany(newParsedData);
+    // Calculate and update total revenue and expense
+    const newDat = await calculateAndUpdateTotalRevenueExpense(req, newParsedData[newParsedData.length - 1].csvId);
+    console.log(newDat);
     
     // Calculate total expense
     const dat = await calcTotalExpense(req.user._id, newParsedData[newParsedData.length - 1].csvId);
-    const datExpense = {expense: dat};
+    //const datExpense = {expense: dat};
     
     // calculate total revenue
     const dat2 = await calcTotalRevenue(req.user._id, newParsedData[newParsedData.length - 1].csvId);
-    const datRevenue = {revenue: dat2};
+    //const datRevenue = {revenue: dat2};
+
     
-    // Update the current user Entities revenue
-    if(dat2[0].totalRevenue) {
-      updateCurrentUserRevenue(datRevenue, req, next);
+    // NOTE NOT YET FINALIZED
+    let val;
+    if(dat.length >= dat2.length) {
+      const doc = dat.map((el, i) => {
+        const s = {...el, ...dat2[i]};
+        return s;
+      });
+      val = {doc, ...newDat};
+      //console.log(`${dat.length} is bigger than ${dat2.length}`);
+    } else if (dat2.length >= dat.length) {
+      const doc = dat2.map((el, i) => {
+        const s = {...el, ...dat[i]};
+        return s;
+      });
+      val = {doc, ...newDat};
+      //console.log(`${dat.length} is bigger than ${dat2.length}`);
     }
-  
-    // Update the current user Entities expense
-    if(dat[0].totalExpense) {
-      updateCurrentUserExpense(datExpense, req, next);
-    }
+    
+    console.log(val);
+    
+    // Update user transaction
+    const trasac = await updateUserTransaction(val, req, next)
     
     res.status(200).json({
       status: "success",
+      processedDoc: trasac,
       length: doc.length,
       data: doc
     });
@@ -320,8 +410,8 @@ exports.calcBasedOnSelectRevenue = wrapAsync(async (req, res, next) => {
   const data = await CSV.aggregate([
     { $match: { select: "revenue", user: req.user._id } },
     { $group: {
-      //_id: "$Select",
-      _id: "$vendor",
+      _id: "$select",
+      //_id: "$vendor",
       totalRevenue: {$sum: "$amount"},
       numberDoc: {$sum: 1}
     } }
@@ -334,13 +424,14 @@ exports.calcBasedOnSelectRevenue = wrapAsync(async (req, res, next) => {
     })
   });
   
-  exports.calcBasedOnSelectExpense = wrapAsync(async (req, res, next) => {
+  // Calculate total revenue and expense
+  exports.calcBasedOnSelect = wrapAsync(async (req, res, next) => {
   const data = await CSV.aggregate([
-    { $match: { select: "expense", user: req.user._id } },
+    { $match: { user: req.user._id, csvId: 1 } },
     { $group: {
-      //_id: "$Select",
-      _id: "$vendor",
-      totalExpense: {$sum: "$amount"},
+      _id: "$select",
+      //_id: "$vendor",
+      total: {$sum: "$amount"},
       numberDoc: {$sum: 1}
     } }
     /*{ $project: {

@@ -27,8 +27,9 @@ const Login = () => {
     e.preventDefault();
     try {
       setIsLoading(true)
-      const {data} = await publicFetch.post("/user/login", {email, password});
-      authContext.setAuthState(data);
+      const data = await publicFetch.post("/user/login", {email, password});
+      //console.log(data);
+      authContext.setAuthState(data.data);
       setSuccessPopup(true);
       setTimeout(() => setRedirectOnSuccess(true) , 1500);
     } catch (e) {

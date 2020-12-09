@@ -4,18 +4,18 @@ import { useHistory } from 'react-router-dom';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const token = localStorage.getItem("token");
+  //const token = localStorage.getItem("token");
   const exp = localStorage.getItem("exp");
   const user = localStorage.getItem("user");
   
   const [authState, setAuthState] = useState({
-    token,
+    token: null,
     exp,
     user: user ? JSON.parse(user) : {}
   });
   
   const setAuthData = ({token, exp, user}) => {
-    localStorage.setItem("token", token);
+    //localStorage.setItem("token", token);
     localStorage.setItem("exp", exp);
     localStorage.setItem("user", JSON.stringify(user));
     setAuthState({
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   };
   
   const isAuthenticated = () => {
-    if(!authState.token || !authState.exp) {
+    if(!authState.exp) {
       return false
     }
     
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   };
   
   const logout = () => {
-    localStorage.removeItem("token");
+    //localStorage.removeItem("token");
     localStorage.removeItem("exp");
     localStorage.removeItem("user");
     

@@ -6,7 +6,9 @@ import "./styles.css";
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <p>sidebar</p>
+      <ul>
+        <li>reports</li>
+      </ul>
     </div>
 );
 };

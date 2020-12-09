@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllTransactionCSVDoc, deleteAllTransactionCSVDoc, getAllCategoryCSVDoc, deleteAllCategoryCSVDoc, calcBasedOnSelectExpense, calcBasedOnSelectRevenue, categorizeByVendor } = require("../controllers/csvController")
+const { getAllTransactionCSVDoc, deleteAllTransactionCSVDoc, getAllCategoryCSVDoc, deleteAllCategoryCSVDoc, calcBasedOnSelect, calcBasedOnSelectRevenue, categorizeByVendor } = require("../controllers/csvController")
 const {protect} = require("../controllers/authController");
 
 
@@ -17,8 +17,8 @@ router
   
 
 router
-  .route("/calc-based-select-expense")
-  .get(protect, calcBasedOnSelectExpense);
+  .route("/calc-based-select")
+  .get(protect, calcBasedOnSelect);
 
 router
   .route("/calc-based-select-revenue")

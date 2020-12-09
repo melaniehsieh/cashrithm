@@ -78,7 +78,7 @@ exports.login = wrapAsync(async (req, res, next) => {
   
   const decodedToken = await jwt.verify(token, process.env.JWT_SECRET);
   user.password = undefined;
-  console.log(decodedToken);
+  
   res.status(200).json({
     status: "success",
     exp: decodedToken.exp,

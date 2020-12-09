@@ -1,8 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState, useContext, createContext} from "react";
+import { Link, useParams } from "react-router-dom";
+import {FetchContext} from "../../context/FetchContext";
+
 import "./styles.css";
 
 const Summary = () => {
+  console.log(useParams());
+  const {id} = useParams();
+  const fetchContext = useContext(FetchContext);
+  const [record, setRecord] = useState({});
+  const [category, setCategory] = useState([]);
+  const [error, setError] = useState("");
+  const [categoryError, setCategoryError] = useState("");
+  
+  
+  
+  const getRecord = async () => {
+    try {
+      const {data} = await fetchContext.authAxios.get(`/entities/user-record/${id}`);
+      setRecord(data.record);
+      //console.log(data);
+    } catch (e) {
+      setError(e.response.data.message);
+      //console.log(e);
+    }
+  };
+  
+  const getCategory = async () => {
+    try {
+      const {data} = await fetchContext.authAxios.get("/entities/user-entities");
+      setCategory(data.entities.category);
+      //console.log(data);
+    } catch (e) {
+      setCategoryError(e.response.data.message);
+      //console.log(e);
+    }
+  };
+  
+  useEffect(() => {
+    getRecord();
+    getCategory();
+  }, []);
+  console.log(record);
   return (
     <div className="summary-container">
       <div className="back">
@@ -35,7 +74,13 @@ const Summary = () => {
         </div>
       </div>
       <div className="summary">
-        <div className="left">
+        {
+          category ? category.map((el) => {
+            return <Category record={record} key={el._id} el={el} />
+          }) : ""
+        }
+        {/*<Transaction record={record.doc} />*/}
+        {/*<div className="left">
           <h4>Category</h4>
           <p>Food</p>
           <p>Advertisement</p>
@@ -48,10 +93,64 @@ const Summary = () => {
           <p>2,055.02</p>
           <p>821.71</p>
           <p>2958.04</p>
-        </div>
+        </div>*/}
       </div>
     </div>
   );
 };
+
+const Category = ({el, record}) => {
+  return (
+    <div className="summary__category--container">
+      <p>{el.type}</p>
+      <div className="sub__summary--category">
+        {
+          el.vendors.map((el) => {
+            return(
+              <div key={el._id}>
+                <p>{el}</p>
+                {
+                  record ? record.doc.map((rec) => {
+                  if((el===rec.revenueVendor && el===rec.expenseVendor)) {
+                  alert(rec.totalRevenue)
+                  alert(rec.totalExpense)
+                    return <p><span>revenue {rec.totalRevenue}</span><span>expense {rec.totalExpense}</span></p> 
+                  }
+                  if(el===rec.revenueVendor || el===rec.expenseVendor) {
+                  alert("b")
+                    return el===rec.revenueVendor ? <p><span>revenue {rec.totalRevenue}</span></p> : <p><span>Expense {rec.totalExpense}</span></p>
+                  }
+                  }) : ""
+                }
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  );
+}
+/*
+const Transaction = ({record}) => {
+  console.log("Transaction");
+  console.log(record);
+  
+  return (
+    <div>
+      {
+        record ? record.map((el) => {
+          return(
+            <div key={el._id}>
+              <p>{el.expenseVendor}</p>
+              <p>{el.totalExpense}</p>
+              <p>{el.revenueVendor}</p>
+              <p>{el.totalRevenue}</p>
+            </div>
+          );
+        }) : ""
+      }
+    </div>
+  );
+}*/
 
 export default Summary;

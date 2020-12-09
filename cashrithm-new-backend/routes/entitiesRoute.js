@@ -2,12 +2,16 @@ const express = require("express");
 
 const router = express.Router();
 
-const {getAllUserEntities, getUserEntities, deleteUserEntities, getLoggedInUserEntities} = require("../controllers/entitiesController");
+const {getAllUserEntities, getUserEntities, deleteUserEntities, getLoggedInUserEntities, getUserRecord} = require("../controllers/entitiesController");
 const { protect, restrictTo } = require("../controllers/authController");
 
 router
   .route("/user-entities")
   .get(protect, getLoggedInUserEntities);
+  
+router
+  .route("/user-record/:id")
+  .get(protect, getUserRecord);
   
 
 router

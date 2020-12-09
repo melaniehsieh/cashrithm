@@ -40,7 +40,7 @@ const Routers = () => {
       <AuthenticatedRoute exact path="/reports"><ReportList /></AuthenticatedRoute>
       <AuthenticatedRoute exact path="/add"><AddReport/></AuthenticatedRoute>
       <AuthenticatedRoute exact path="/category"><AddCategories /></AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/summary"><Summary/></AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/summary/:id"><Summary/></AuthenticatedRoute>
     </Switch>
   );
 }

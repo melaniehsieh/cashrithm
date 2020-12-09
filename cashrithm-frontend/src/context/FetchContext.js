@@ -5,12 +5,12 @@ import { AuthContext } from './AuthContext';
 const FetchContext = createContext();
 
 export const FetchProvider = ({ children }) => {
-  const authContext = useContext(AuthContext);
+  //const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({
-    baseURL: "http://localhost:3333/api/v1"
+    baseURL: "/api/v1"
   });
-  
+  /*
   authAxios.interceptors.request.use(
     config => {
       config.headers.Authorization = `Bearer ${authContext.authState.token}`
@@ -20,7 +20,7 @@ export const FetchProvider = ({ children }) => {
       return Promise.reject(error)
     }
   );
-
+*/
   return (
     <FetchContext.Provider
       value={{

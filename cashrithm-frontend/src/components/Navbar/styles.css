@@ -21,18 +21,20 @@ nav {
 .user__nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 12rem;
+  width: 10rem;
   justify-self: end;
   grid-gap: .5rem;
   align-content: center;
   /*border: 1px solid black;*/
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 16%);
+  border-radius: 1rem;
 }
 
 .user__name {
   border-radius: 1rem;
   padding: .5rem;
-  width: 5rem;
-  background: green;
+  width: 4rem;
+  font-weight: 700;
 }
 
 .btn {
@@ -41,8 +43,8 @@ nav {
 }
 
 .btn__logout {
-  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
-  background: white;
+  /*box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);*/
+  background: rgba(0, 0, 0, 16%);
   font-weight: 700;
   border-radius: 1rem;
 }
@@ -53,8 +55,9 @@ nav {
   color: black;
 }
 
-.sidebar p {
-  font-size: .5rem;
+.sidebar {
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 @media screen and (max-width: 768px) {

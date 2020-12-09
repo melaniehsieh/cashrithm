@@ -4,7 +4,7 @@ const categorySchema= new mongoose.Schema({
   type: String,
   vendors: [String]
 });
-
+/*
 const childRevenueSchema = new mongoose.Schema({
   vendor: String,
   totalRevenue: Number
@@ -16,12 +16,46 @@ const childExpenseSchema = new mongoose.Schema({
 });
 
 const transactionRevenueSchema = new mongoose.Schema({
-  revenue: [childRevenueSchema]
+  revenue: [childRevenueSchema],
+  createdAt: {
+    type: Date,
+    default: new Date()
+  }
 });
 
 const transactionExpenseSchema = new mongoose.Schema({
-  expense: [childExpenseSchema]
+  expense: [childExpenseSchema],
+  createdAt: {
+    type: Date,
+    default: new Date()
+  } 
+});*/
+
+const childTransactionSchema = new mongoose.Schema({
+  expenseVendor: String,
+  totalExpense: Number,
+  revenueVendor: String,
+  totalRevenue: Number
 });
+
+const transactionSchema = new mongoose.Schema({
+  allTotalRevenue: Number,
+  allTotalExpense: Number,
+  doc: [childTransactionSchema],
+  createdAt: {
+    type: Date,
+    default: new Date()
+  } 
+});
+/*
+const revenueExpenseSchema = new mongoose.Schema({
+  totalExpense: Number,
+  totalRevenue: Number,
+  createdAt: {
+    type: Date,
+    default: new Date()
+  }
+});*/
 
 const entitiesSchema = new mongoose.Schema({
   name: String,
@@ -31,8 +65,10 @@ const entitiesSchema = new mongoose.Schema({
     ref: "User"
   },
   category: [categorySchema],
-  transactionExpense: [transactionExpenseSchema],
+  transaction: [transactionSchema],
+  /*transactionExpense: [transactionExpenseSchema],
   transactionRevenue: [transactionRevenueSchema],
+  totalRevenueExpense: [revenueExpenseSchema],*/
   createdAt: {
     type: Date,
     default: new Date()

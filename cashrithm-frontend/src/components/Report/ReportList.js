@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./styles.css";
-import RevenueReport from "./Report";
+import Report from "./Report";
 import Navbar from "../Navbar/Navbar";
 import Sidebar from "../Navbar/Sidebar";
 import {AuthContext} from "../../context/AuthContext";
@@ -11,8 +11,9 @@ import {FetchContext} from "../../context/FetchContext";
 const ReportList = () => {
   const authContext = useContext(AuthContext);
   const fetchContext = useContext(FetchContext);
-  const [entities, setEntities] = useState();
+  const [entities, setEntities] = useState({});
   const [entitiesError, setEntitiesError] = useState("");
+  const [redirectOnSuccess, setRedirectOnSuccess] = useState(false);
   
   const fetchEntities = async () => {
     try {
@@ -20,6 +21,8 @@ const ReportList = () => {
       setEntities(data.entities)
     } catch (e) {
       setEntitiesError(e.response.data.message);
+      console.log(e);
+      setRedirectOnSuccess(true)
     };
   };
   
@@ -32,21 +35,17 @@ const ReportList = () => {
   console.log(entitiesError);
   return (
     <div className="main__dashboard">
+      {redirectOnSuccess && <Redirect to="/login" />}
       <Navbar />
       <div className="report__list--container">
         <Sidebar />
         <div className="report-list">
           <div className="report">
-            <div className="record">
-              <a href="/summary">
-                <h2>month</h2>
-                {
-                  entities ? entities.transactionRevenue.map((el) => {
-                      return <RevenueReport revenue={el} />
+           {
+              entities.transaction ? entities.transaction.map((el) => {
+                return <Report doc={el} key={el._id} />
               }) : ""
             }
-              </a>
-            </div>
           </div>
           <div className="records-container">
             <div>
@@ -55,7 +54,7 @@ const ReportList = () => {
             <div className="category__part">
               <Link to="/category">Create New Category </Link>
             </div>
-            <CategoryNav />
+            <CategoryNav entities={entities} />
           </div>
         </div>
       </div>
@@ -63,23 +62,28 @@ const ReportList = () => {
   );
 };
 
-const CategoryNav = () => {
+const CategoryNav = ({entities}) => {
   return (
     <div className="category__part">
       <h3 className="big__header">Category</h3>
-      <SubCategoryNav />
-      <SubCategoryNav />
-      <SubCategoryNav />
+      {
+        entities.category ? entities.category.map((el) => {
+          return <SubCategoryNav key={el._id} category={el} />
+        }) : ""
+      }
     </div>
   );
 }
 
-const SubCategoryNav = () => {
+const SubCategoryNav = ({category}) => {
   return(
     <>
-      <h5 className="sub__big__header">Food</h5>
-      <p className="category__vendor">You know</p>
-      <p className="category__vendor">second time</p>
+      <h5 className="sub__big__header">{category.type.toUpperCase()}</h5>
+      {
+        category.vendors.map((el, i) => {
+          return <p key={i} className="category__vendor">{el}</p>
+        })
+      }
     </>
   );
 }

@@ -47,6 +47,19 @@ exports.getLoggedInUserEntities = wrapAsync(async(req,  res, next) => {
   });
 });
 
+exports.getUserRecord = wrapAsync(async (req, res, next) => {
+  const {id} = req.params;
+  console.log(req.user);
+  
+  const data = await Entities.findOne({user: req.user._id});
+  const record = data.transaction.id(id);
+  
+  res.status(200).json({
+    status: "success",
+    record
+  });
+});
+
 exports.deleteUserEntities = wrapAsync(async(req,  res, next) => {
   const {id} = req.params;
   
