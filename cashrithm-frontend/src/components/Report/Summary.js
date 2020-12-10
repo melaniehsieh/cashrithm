@@ -59,7 +59,7 @@ const Summary = () => {
           <h4>Amount($)</h4>
         </div>
       </div>
-      <div className="summary">
+      <div className="summaryh">
         <div className="left">
           <p>Gross Profit</p>
           <p>Operating Expense</p>
@@ -73,7 +73,7 @@ const Summary = () => {
           <p>121,187.04</p>
         </div>
       </div>
-      <div className="summary">
+      <div className="category__summary">
         {
           category ? category.map((el) => {
             return <Category record={record} key={el._id} el={el} />
@@ -102,23 +102,21 @@ const Summary = () => {
 const Category = ({el, record}) => {
   return (
     <div className="summary__category--container">
-      <p>{el.type}</p>
+      <h2 className="header__vendor">{el.type.toUpperCase()}</h2>
       <div className="sub__summary--category">
         {
           el.vendors.map((el) => {
             return(
-              <div key={el._id}>
+              <div className="category__vendors" key={el._id}>
                 <p>{el}</p>
                 {
                   record ? record.doc.map((rec) => {
                   if((el===rec.revenueVendor && el===rec.expenseVendor)) {
-                  alert(rec.totalRevenue)
-                  alert(rec.totalExpense)
-                    return <p><span>revenue {rec.totalRevenue}</span><span>expense {rec.totalExpense}</span></p> 
+ 
+                    return <p key={rec._id}><span>${rec.totalRevenue}</span><span>${rec.totalExpense}</span></p> 
                   }
                   if(el===rec.revenueVendor || el===rec.expenseVendor) {
-                  alert("b")
-                    return el===rec.revenueVendor ? <p><span>revenue {rec.totalRevenue}</span></p> : <p><span>Expense {rec.totalExpense}</span></p>
+                    return el===rec.revenueVendor ? <p className="revenue__color"  key={rec._id}><span>${rec.totalRevenue}</span></p> : <p className="expense__color" key={rec._id}><span>${rec.totalExpense}</span></p>
                   }
                   }) : ""
                 }
