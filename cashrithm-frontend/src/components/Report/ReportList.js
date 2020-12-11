@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import "./styles.css";
 import Report from "./Report";
 import Navbar from "../Navbar/Navbar";
-import Sidebar from "../Navbar/Sidebar";
 import { AuthContext } from "../../context/AuthContext";
 import { FetchContext } from "../../context/FetchContext";
 
@@ -34,24 +33,21 @@ const ReportList = () => {
   console.log(entities);
   console.log(entitiesError);
   return (
-    <div className="main__dashboard">
+    <div>
       {redirectOnSuccess && <Redirect to="/login" />}
       <Navbar />
-      <div className="report__list--container">
-        <Sidebar />
-        <div className="report-list">
-          <div className="report">
-            {entities.transaction
-              ? entities.transaction.map((el) => {
-                  return <Report doc={el} key={el._id} />;
-                })
-              : ""}
-          </div>
-          <div className="records-container">
-            <Link to="/add">Create New Record</Link>
-            <Link to="/category">Create New Category </Link>
-            <CategoryNav entities={entities} />
-          </div>
+      <div className="report-list">
+        <div className="report">
+          {entities.transaction
+            ? entities.transaction.map((el) => {
+                return <Report doc={el} key={el._id} />;
+              })
+            : ""}
+        </div>
+        <div className="records-container">
+          <Link to="/add">Create New Record</Link>
+          <Link to="/category">Create New Category </Link>
+          <CategoryNav entities={entities} />
         </div>
       </div>
     </div>

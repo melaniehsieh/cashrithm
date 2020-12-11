@@ -1,15 +1,13 @@
 import React, { useState, useContext } from "react";
-import {Redirect, Link} from "react-router-dom";
-import {VscLoading} from "react-icons/vsc";
-import {VscRss} from "react-icons/vsc";
-import {VscTriangleUp} from "react-icons/vsc";
-import Popup from "../Popup/Popup"
+import { Redirect, Link } from "react-router-dom";
+import { VscLoading } from "react-icons/vsc";
+import { VscRss } from "react-icons/vsc";
+import { VscTriangleUp } from "react-icons/vsc";
+import Popup from "../Popup/Popup";
 
 import "./styles.css";
-import {publicFetch} from "../../utils/PublicFetch";
-import {AuthContext} from "../../context/AuthContext";
-
-
+import { publicFetch } from "../../utils/PublicFetch";
+import { AuthContext } from "../../context/AuthContext";
 
 const Signup = () => {
   const authContext = useContext(AuthContext);
@@ -17,41 +15,49 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
-    passwordConfirm: ""
+    passwordConfirm: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [successPopup, setSuccessPopup] = useState(false);
   const [errorPopup, setErrorPopup] = useState(false);
   const [redirectOnSuccess, setRedirectOnSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  
+
   const handleOnchange = (e) => {
-    const {name, value} = e.target;
-    setUserData({...userData, [name]: value});
-  }
-  
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setIsLoading(true)
-      const {data} = await publicFetch.post("/user/signup", userData);
+      setIsLoading(true);
+      const { data } = await publicFetch.post("/user/signup", userData);
       authContext.setAuthState(data);
       setSuccessPopup(true);
       setTimeout(() => setRedirectOnSuccess(true), 1500);
     } catch (e) {
       console.log(e);
       setErrorPopup(true);
-      setIsLoading(false)
+      setIsLoading(false);
       setErrorMessage(e.response.data.message);
     }
   };
 
-  const {name, email, password, passwordConfirm} = userData;
+  const { name, email, password, passwordConfirm } = userData;
   return (
     <form className="auth-container" onSubmit={handleSubmit}>
-      {redirectOnSuccess && <Redirect to ="/reports" />}
-      {successPopup && <Popup type="success" text="user successful created" setSuccessPopup={setSuccessPopup} />}
-      {errorPopup && <Popup type="error" text={errorMessage} setErrorPopup={setErrorPopup} />}
+      {redirectOnSuccess && <Redirect to="/reports" />}
+      {successPopup && (
+        <Popup
+          type="success"
+          text="user successful created"
+          setSuccessPopup={setSuccessPopup}
+        />
+      )}
+      {errorPopup && (
+        <Popup type="error" text={errorMessage} setErrorPopup={setErrorPopup} />
+      )}
       <h4>Join Us!</h4>
       <input
         id="name"
@@ -91,7 +97,16 @@ const Signup = () => {
         required
         minLength="8"
       />
-      <button>{isLoading ? <div><VscTriangleUp className="spinner" /><span>Signing up...</span></div> : <span>Signup</span>}</button>
+      <button>
+        {isLoading ? (
+          <div>
+            <VscTriangleUp className="spinner" />
+            <span>Signing up...</span>
+          </div>
+        ) : (
+          <span>Signup</span>
+        )}
+      </button>
       <p>
         Already have an account?
         <Link to="/login"> Login</Link>

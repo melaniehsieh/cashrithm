@@ -5,6 +5,8 @@
   width: 100vw;
   background-color: #ffffff;
   min-height: 100vh;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .summary-container .back {
@@ -15,12 +17,16 @@
   text-align: left;
   text-decoration: none;
 }
+
 .summary-container a,
-.summary-container a:visited {
+.summary-container a:visited,
+.summary-title {
   text-decoration: none;
   color: black;
+  font: 1.3rem "Futura";
   line-height: 150%;
 }
+
 .summary-container a:hover {
   border-bottom: 1px solid;
 }
@@ -30,112 +36,18 @@
   flex: 1 1;
 }
 
-.summary-title {
-  width: 50%;
-  font: 30px "Futura";
-  line-height: 200%;
-  text-align: center;
-}
-
 .summary {
   width: 50%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font: 1em "Futura";
 }
 
 .summary .left {
   text-align: left;
 }
+
 .summary .right {
   text-align: right;
 }
-
-/*
-.revenue__container {
-  width: 85%;
-  margin: .5rem auto .8rem;
-  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
-  display: grid;
-  grid-template-columns: 40% 60%;
-  align-content: center;
-  height: 2rem;
-  border-radius: .8rem;
-}
-.expense__container {
-  width: 85%;
-  margin: .5rem auto .8rem;
-  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
-  display: grid;
-  grid-template-columns: 40% 60%;
-  align-content: center;
-  height: 2rem;
-  border-radius: .8rem;
-}
-
-.revenue__expense--container {
-  font-size: .8rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.revenue__container div:nth-child(1) {
-  background: #ed4040;
-  color: white;
-  height: 2rem;
-  font-weight: 700;
-  border-radius: .8rem;
-  display: grid;
-  align-content: center;
-}
-
-.revenue__container div:nth-child(2) {
-  display: grid;
-  align-content: center;
-}
-
-.expense__container div:nth-child(1) {
-  background: #5840ed;
-  color: white;
-  height: 2rem;
-  font-weight: 700;
-  border-radius: .8rem;
-  display: grid;
-  align-content: center;
-}
-
-.expense__container div:nth-child(2) {
-  display: grid;
-  align-content: center;
-}
-
-.summary-container {
-  font-size: 1rem;
-  width: 80%;
-  margin: 0 auto;
-  border: 1px solid black;
-}
-
-.header__vendor {
-  font-size: 0.5rem;
-}
-
-.summary__category--container {
-  width: 100%;
-  font-size: 0.7rem;
-  text-align: left;
-  background: lightgray;
-  margin: 0 0 1rem 0;
-  border: 1px solid red;
-} */
-
-/* .sub__summary--category {
-  width: 90%;
-  margin: 0 auto;
-  border: 1px solid black;
-}
-
-.category__vendors {
-  display: grid;
-  grid-template-columns: 60% 20% 20%;
-} */

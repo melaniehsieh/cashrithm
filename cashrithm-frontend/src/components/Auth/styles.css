@@ -1,7 +1,7 @@
 .auth-container {
   box-shadow: 0 0 1rem rgba(0, 0, 0, 17%);
   border-top: 4px solid green;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   width: 60%;
   margin: 7rem auto 0;
   padding: 1rem 0;
@@ -28,7 +28,6 @@
 .auth-container input:focus:invalid {
   box-shadow: 0 0 9px 9px rgba(0, 0, 0, 17%);
   border: 1px solid red;
-  
 }
 
 .auth-container button {
@@ -65,7 +64,7 @@
 }
 
 .spinner {
-  padding: 0 .5rem 0 0;
+  padding: 0 0.5rem 0 0;
   animation: rotate 1s linear infinite;
 }
 @keyframes rotate {
@@ -90,12 +89,11 @@
   }
 }
 
-
 @media screen and (max-width: 768px) {
   .auth-container {
     box-shadow: 0 0 1rem rgba(0, 0, 0, 17%);
     border-top: 4px solid green;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     width: 90%;
     margin: 3rem auto;
     padding: 1rem 0;
@@ -111,7 +109,7 @@
     background-color: #f0f0f0;
     border: #f0f0f0 solid 1px;
   }
-  
+
   .auth-container button {
     width: 14em;
     padding: 15px 50px;
@@ -124,17 +122,17 @@
     margin-top: 40px;
     margin-bottom: 20px;
   }
-  
+
   .auth-container p {
     font: 12px "Futura";
   }
-  
+
   .auth-container a {
     font: 12px "Futura";
     color: #00803c;
     text-decoration: none;
   }
-  
+
   .auth-container h4 {
     font: 20px "Futura";
   }

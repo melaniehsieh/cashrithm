@@ -1,19 +1,9 @@
 @media screen and (min-width: 768px) {
-  .main__dashboard {
-    width: 100%;
-    margin: 0 0 2rem 0;
-  }
-
-  .report__list--container {
-    display: grid;
-    grid-template-columns: 10% 90%;
-  }
-  
   .report {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 0.2rem;
-    width: 80%;
+    width: 50%;
     margin: 2rem auto;
   }
 
@@ -63,18 +53,14 @@
 
   .report-list {
     width: 100%;
+    height: 100%;
     display: flex;
     background-color: #f0f0f0;
   }
 
-  .report-list > .records-container {
+  .records-container a {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    margin-right: 15%;
-  }
-
-  .records-container a {
     padding: 0.5rem;
     background-color: white;
     color: black;
@@ -99,8 +85,6 @@
     font: 20px "Futura";
     border-radius: 10px;
     text-decoration: none;
-    margin-top: 1em;
-    margin-bottom: 1em;
     margin: 1em 0 1em 0;
     box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
   }
@@ -132,142 +116,63 @@
 }
 
 @media screen and (max-width: 768px) {
-  .main__dashboard {
-    width: 100%;
-    margin: 0 0 2rem 0;
-  }
-
-  .report__list--container {
-    display: grid;
-    grid-template-columns: 10% 90%;
-  }
-
-  .report-list {
-    background-color: #f0f0f0;
-    display: grid;
-    grid-template-columns: 65% 35%;
-    grid-gap: 0.5rem;
-  }
-
-  .report {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 0.2rem;
-    width: 80%;
-    margin: 2rem auto;
-  }
-
-  .report {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 5%;
-    text-align: left;
-  }
-
-  .record h2 {
-    font: 30px "Futura";
-  }
-
-  .record p {
-    font: 20px "Futura";
-  }
-
-  .record p span {
-    padding: 0 0 0 1rem;
-  }
-
-  .record {
-    width: fit-content;
-    height: fit-content;
-    background-color: white;
-    border-radius: 10px;
-    padding: 1rem 1.5rem;
-    margin: 1rem;
-    cursor: pointer;
-    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
-  }
-
-  .report-list a,
-  .report-list a:visited {
-    text-decoration: none;
-    color: black;
-  }
-
-  .revenue-figure {
-    color: #ed4040;
-  }
-
-  .expense-figure {
-    color: #5840ed;
-  }
-
-  .report-list {
-    width: 100%;
-    display: flex;
-    margin-top: 5%;
-    background-color: #f0f0f0;
-  }
-
-  .report-list > .records-container {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    margin-right: 15%;
-  }
-
-  .records-container a {
-    padding: 0.5rem;
-    background-color: white;
-    color: black;
-    font: 20px "Futura";
-    width: 20rem;
-    border-radius: 15px;
-    text-decoration: none;
-    margin-top: 1em;
-    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
-  }
-
-  .records-container {
-    width: 90%;
-    padding: 3rem 0 0 0;
-  }
-
-  .category-container {
-    padding: 0.5rem;
-    width: 20rem;
-    background-color: white;
-    color: black;
-    font: 20px "Futura";
-    border-radius: 10px;
-    text-decoration: none;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    margin: 1em 0 1em 0;
-    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
-  }
-
-  .record:hover,
-  .records-container a:hover {
-    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 25%);
-  }
-
-  .big__header {
-    text-align: center;
-    font: 20px "Futura";
-  }
-
-  .sub__big__header {
-    text-align: left;
-    padding: 0 0 0 2rem;
-    margin: 0.8rem 0;
-    font: 20px "Futura";
-  }
-
-  .category__vendor {
-    padding: 0 0 0 3rem;
-    margin: 0 0 0.5rem 0;
-    font: 18px "Futura";
-    color: #707070;
-    text-align: left;
-  }
 }
+
+/* .revenue__container {
+  width: 85%;
+  margin: 0.5rem auto 0.8rem;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-content: center;
+  height: 2rem;
+  border-radius: 0.8rem;
+} */
+
+/* .expense__container {
+  width: 85%;
+  margin: 0.5rem auto 0.8rem;
+  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-content: center;
+  height: 2rem;
+  border-radius: 0.8rem;
+} */
+
+
+/* .revenue__expense--container {
+  font-size: 0.8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+} */
+
+/* .revenue__container div:nth-child(1) {
+  background: #ed4040;
+  color: white;
+  height: 2rem;
+  font-weight: 700;
+  border-radius: 0.8rem;
+  display: grid;
+  align-content: center;
+} */
+
+/* .revenue__container div:nth-child(2) {
+  display: grid;
+  align-content: center;
+} */
+
+/* .expense__container div:nth-child(1) {
+  background: #5840ed;
+  color: white;
+  height: 2rem;
+  font-weight: 700;
+  border-radius: 0.8rem;
+  display: grid;
+  align-content: center;
+} */
+
+/* .expense__container div:nth-child(2) {
+  display: grid;
+  align-content: center;
+} */
