@@ -1,0 +1,155 @@
+@media screen and (max-width: 768px) {
+  form {
+    margin-top: 7em;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .add-report h3 {
+    font: 40px "Futura";
+  }
+
+  .add-report input {
+    margin-top: 2em;
+    width: 15em;
+    color: #000;
+    background-color: #f0f0f0;
+    border: #f0f0f0 solid 1px;
+    padding: 20px 0px 20px 30px;
+    font: 20px "Futura";
+    border-radius: 44px;
+  }
+
+  .dropzone {
+    margin-top: 1em;
+    width: 15em;
+    color: #707070;
+    background-color: #f0f0f0;
+    border: #f0f0f0 solid 1px;
+    text-align: left;
+    font: 20px "Futura";
+    padding: 0px 0px 0px 30px;
+    border-radius: 44px;
+  }
+
+  .dropzone:hover,
+  input:hover {
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+  }
+
+  ::placeholder {
+    color: #707070;
+  }
+
+  .dropzone:focus,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 25%);
+  }
+
+  .add-report button {
+    padding: 15px 40px;
+    color: #fff;
+    background-color: #00a55a;
+    font: 20px "Futura";
+    border: #00a55a solid 1px;
+    border-radius: 50px;
+    margin-top: 1em;
+  }
+
+  .add-report button:hover {
+    cursor: pointer;
+    background-color: #00803c;
+    border: #00803c solid 1px;
+    box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, 17%);
+  }
+
+  .import-csv ul li {
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  form {
+    margin-top: 7em;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .add-report h3 {
+    font: 40px "Futura";
+  }
+
+  .add-report input {
+    margin-top: 2em;
+    width: 30em;
+    color: #000;
+    background-color: #f0f0f0;
+    border: #f0f0f0 solid 1px;
+    padding: 20px 0px 20px 30px;
+    font: 20px "Futura";
+    border-radius: 44px;
+  }
+
+  .dropzone {
+    margin-top: 1em;
+    width: 30em;
+    color: #696969;
+    background-color: #f0f0f0;
+    border: #f0f0f0 solid 1px;
+    text-align: left;
+    font: 20px "Futura";
+    padding: 0px 0px 0px 30px;
+    border-radius: 44px;
+  }
+
+  .dropzone:hover,
+  input:hover {
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+  }
+
+  ::placeholder {
+    color: #696969;
+  }
+
+  .dropzone:focus,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+    outline: none;
+    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 25%);
+  }
+
+  .add-report button {
+    padding: 15px 40px;
+    color: #fff;
+    background-color: #00a55a;
+    font: 20px "Futura";
+    border: #00a55a solid 1px;
+    border-radius: 50px;
+    margin-top: 1em;
+  }
+
+  .add-report button:hover {
+    cursor: pointer;
+    background-color: #00803c;
+    border: #00803c solid 1px;
+    box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, 17%);
+  }
+
+  .import-csv ul li {
+    text-align: left;
+  }
+}

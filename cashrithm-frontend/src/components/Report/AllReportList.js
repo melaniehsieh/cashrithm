@@ -1,18 +1,16 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import Report from "./Report";
-import Navbar from "../Navbar/Navbar";
-import {AuthContext} from "../../context/AuthContext";
-
+import { AuthContext } from "../../context/AuthContext";
 
 const AllReportList = () => {
   const authContext = useContext(AuthContext);
-  
+
   return (
     <div className="main__dashboard">
       <div className="report-list">
-        <div className="report">
+        {/* <div className="report">
           <Report
             month="Feb"
             revenue="300.00"
@@ -31,7 +29,7 @@ const AllReportList = () => {
             expense="-25.00"
             url="/summary"
           />
-        </div>
+        </div> */}
         <div className="spacer"></div>
         <div className="records-container">
           <Link to="/add">Create New Record</Link>
