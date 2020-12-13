@@ -29,6 +29,8 @@ const multerStorage = multer.diskStorage({
 const multerFilter = (req, file, cb) => {
   if(file.mimetype.startsWith('text/csv')) {
     cb(null, true);
+  } else if (file.mimetype.startsWith('text/comma-separated-values')) {
+    cb(null, true);
   } else {
     cb(new ThrowError(400, 'Invalid file type please upload only a CSV file'), false);
   }
