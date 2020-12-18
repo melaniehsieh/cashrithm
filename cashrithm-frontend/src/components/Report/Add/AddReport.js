@@ -25,8 +25,12 @@ const AddReport = () => {
     try {
       const formData = new FormData();
       formData.append("csv", file);
+<<<<<<< HEAD
       formData.append("title", title);
       await authAxios.post(
+=======
+      const { data } = await authAxios.post(
+>>>>>>> 018f58f26fd18939020b794442e2b54d821aa632
         "/upload-csv/transaction",
         formData
       );
