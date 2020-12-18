@@ -24,28 +24,11 @@
     border-radius: 44px;
   }
 
-  .dropzone {
-    margin-top: 1em;
-    width: 15em;
-    color: #707070;
-    background-color: #f0f0f0;
-    border: #f0f0f0 solid 1px;
-    text-align: left;
-    font: 20px "Futura";
-    padding: 0px 0px 0px 30px;
-    border-radius: 44px;
-  }
-
-  .dropzone:hover,
-  input:hover {
-    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
-  }
-
   ::placeholder {
     color: #707070;
   }
 
-  .dropzone:focus,
+  input:hover,
   input:focus,
   select:focus,
   textarea:focus,
@@ -69,10 +52,6 @@
     background-color: #00803c;
     border: #00803c solid 1px;
     box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, 17%);
-  }
-
-  .import-csv ul li {
-    text-align: left;
   }
 }
 
@@ -102,28 +81,11 @@
     border-radius: 44px;
   }
 
-  .dropzone {
-    margin-top: 1em;
-    width: 30em;
-    color: #696969;
-    background-color: #f0f0f0;
-    border: #f0f0f0 solid 1px;
-    text-align: left;
-    font: 20px "Futura";
-    padding: 0px 0px 0px 30px;
-    border-radius: 44px;
-  }
-
-  .dropzone:hover,
-  input:hover {
-    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
-  }
-
   ::placeholder {
     color: #696969;
   }
 
-  .dropzone:focus,
+  input:hover,
   input:focus,
   select:focus,
   textarea:focus,
@@ -147,9 +109,5 @@
     background-color: #00803c;
     border: #00803c solid 1px;
     box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, 17%);
-  }
-
-  .import-csv ul li {
-    text-align: left;
   }
 }

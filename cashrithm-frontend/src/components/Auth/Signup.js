@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Redirect, Link } from "react-router-dom";
-import { VscLoading } from "react-icons/vsc";
-import { VscRss } from "react-icons/vsc";
+//import { VscLoading } from "react-icons/vsc";
+//import { VscRss } from "react-icons/vsc";
 import { VscTriangleUp } from "react-icons/vsc";
 import Popup from "../Popup/Popup";
 

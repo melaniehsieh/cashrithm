@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext } from 'react';
 import axios from 'axios';
-import { AuthContext } from './AuthContext';
+//import { AuthContext } from './AuthContext';
 
 const FetchContext = createContext();
 

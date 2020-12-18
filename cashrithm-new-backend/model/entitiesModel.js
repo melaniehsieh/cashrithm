@@ -39,6 +39,7 @@ const childTransactionSchema = new mongoose.Schema({
 });
 
 const transactionSchema = new mongoose.Schema({
+  title: String,
   allTotalRevenue: Number,
   allTotalExpense: Number,
   doc: [childTransactionSchema],

@@ -1,53 +1,114 @@
-.summary-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  background-color: #ffffff;
-  min-height: 100vh;
-  width: 80%;
-  margin: 0 auto;
+@media screen and (max-width: 768px) {
+  .summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    background-color: #ffffff;
+    min-height: 100vh;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .summary-container .back {
+    width: 100%;
+    padding-left: 5em;
+    padding-top: 2em;
+    align-items: left;
+    text-align: left;
+    text-decoration: none;
+  }
+
+  .summary-container a,
+  .summary-container a:visited,
+  .summary-title {
+    text-decoration: none;
+    color: black;
+    font: 1.3rem "Futura";
+    line-height: 150%;
+  }
+
+  .summary-container a:hover {
+    border-bottom: 1px solid;
+  }
+
+  .summary-header {
+    flex-direction: row;
+    flex: 1 1;
+  }
+
+  .summary {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    font: 1em "Futura";
+  }
+
+  .category {
+    display: flex;
+    flex-direction: column;
+    font: 1em "Futura";
+  }
 }
 
-.summary-container .back {
-  width: 100%;
-  padding-left: 5em;
-  padding-top: 2em;
-  align-items: left;
-  text-align: left;
-  text-decoration: none;
-}
+@media screen and (min-width: 768px) {
+  .summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    background-color: #ffffff;
+    min-height: 100vh;
+    width: 80%;
+    margin: 0 auto;
+  }
 
-.summary-container a,
-.summary-container a:visited,
-.summary-title {
-  text-decoration: none;
-  color: black;
-  font: 1.3rem "Futura";
-  line-height: 150%;
-}
+  .summary-container .back {
+    width: 100%;
+    padding-left: 5em;
+    padding-top: 2em;
+    align-items: left;
+    text-align: left;
+    text-decoration: none;
+  }
 
-.summary-container a:hover {
-  border-bottom: 1px solid;
-}
+  .summary-container a,
+  .summary-container a:visited,
+  .summary-title {
+    text-decoration: none;
+    color: black;
+    font: 1.3rem "Futura";
+    line-height: 150%;
+  }
 
-.summary-header {
-  flex-direction: row;
-  flex: 1 1;
-}
+  .summary-container a:hover {
+    border-bottom: 1px solid;
+  }
 
-.summary {
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  font: 1em "Futura";
-}
+  .summary-header {
+    flex-direction: row;
+    flex: 1 1;
+  }
 
-.summary .left {
-  text-align: left;
-}
+  .summary {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font: 1em "Futura";
+  }
 
-.summary .right {
-  text-align: right;
+  .summary .left {
+    text-align: left;
+  }
+
+  .summary .right {
+    text-align: right;
+  }
+
+  .category {
+    display: flex;
+    flex-direction: column;
+    font: 1em "Futura";
+  }
 }

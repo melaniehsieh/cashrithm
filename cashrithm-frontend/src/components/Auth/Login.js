@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { FetchContext } from "../../context/FetchContext";
-import { VscLoading } from "react-icons/vsc";
-import { VscRss } from "react-icons/vsc";
+//import { FetchContext } from "../../context/FetchContext";
+//import { VscLoading } from "react-icons/vsc";
+//import { VscRss } from "react-icons/vsc";
+//import { ImSpinner } from "react-icons/im";
 import { VscTriangleUp } from "react-icons/vsc";
-import { ImSpinner } from "react-icons/im";
 import Popup from "../Popup/Popup";
 import { publicFetch } from "../../utils/PublicFetch";
 

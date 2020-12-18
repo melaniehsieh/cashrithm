@@ -3,13 +3,15 @@ import { Link, Redirect } from "react-router-dom";
 import "./styles.css";
 import Report from "./Report";
 import Navbar from "../Navbar/Navbar";
-import { AuthContext } from "../../context/AuthContext";
+//import { AuthContext } from "../../context/AuthContext";
 import { FetchContext } from "../../context/FetchContext";
+import Popup from "../Popup/Popup";
 
 const ReportList = () => {
-  const authContext = useContext(AuthContext);
+  //const authContext = useContext(AuthContext);
   const fetchContext = useContext(FetchContext);
   const [entities, setEntities] = useState({});
+  const [errorPopup, setErrorPopup] = useState("");
   const [entitiesError, setEntitiesError] = useState("");
   const [redirectOnSuccess, setRedirectOnSuccess] = useState(false);
 
@@ -30,11 +32,14 @@ const ReportList = () => {
     fetchEntities();
   }, []);
 
-  console.log(entities);
-  console.log(entitiesError);
+  //console.log(entities);
+  //console.log(entitiesError);
   return (
     <div>
       {redirectOnSuccess && <Redirect to="/login" />}
+      {errorPopup && (
+        <Popup type="error" text={entitiesError} setErrorPopup={setErrorPopup} />
+      )}
       <Navbar />
       <div className="report-list">
         <div className="report">

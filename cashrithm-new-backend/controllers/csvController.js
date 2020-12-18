@@ -288,14 +288,14 @@ exports.uploadTransactionCsv = wrapAsync(async (req, res, next) => {
         const s = {...el, ...dat2[i]};
         return s;
       });
-      val = {doc, ...newDat};
+      val = {doc, ...newDat, title: req.body.title };
       //console.log(`${dat.length} is bigger than ${dat2.length}`);
     } else if (dat2.length >= dat.length) {
       const doc = dat2.map((el, i) => {
         const s = {...el, ...dat[i]};
         return s;
       });
-      val = {doc, ...newDat};
+      val = {doc, ...newDat, title: req.body.title };
       //console.log(`${dat.length} is bigger than ${dat2.length}`);
     }
     

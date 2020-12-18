@@ -13,7 +13,10 @@ const Popup = ({type, text, setErrorPopup, setSuccessPopup}) => {
   if(type === "error" || type === "fail") {
     return(
       <div className="error popup">
-        <div><span><VscChromeClose className="popup__btn" /></span><span>{text}</span></div>
+        <div className="error__label">
+        <span><VscChromeClose className="popup__btn" /></span><span>error</span>
+        </div>
+        <div className="error__text">{text}</div>
       </div>
     );
   }
@@ -21,7 +24,9 @@ const Popup = ({type, text, setErrorPopup, setSuccessPopup}) => {
   if(type === "success") {
     return(
       <div className="success popup">
-        <div><span><VscCheck className="popup__btn" /></span><span>{text}</span></div>
+        <div className="success__label"><span><VscCheck className="popup__btn" /></span><span>success</span>
+        </div>
+        <div className="success__text">{text}</div>
       </div>
     );
   }

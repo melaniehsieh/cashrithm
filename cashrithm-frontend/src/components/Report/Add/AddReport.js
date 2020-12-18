@@ -1,32 +1,35 @@
 import React, { useState, useContext } from "react";
 import "./styles.css";
-import {Redirect} from "react-router-dom";
-import {FetchContext} from "../../../context/FetchContext";
+import { Redirect } from "react-router-dom";
+import { FetchContext } from "../../../context/FetchContext";
 import Popup from "../../Popup/Popup";
-import {VscTriangleUp} from "react-icons/vsc";
-
+import { VscTriangleUp } from "react-icons/vsc";
 
 const AddReport = () => {
+  const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
-  const {authAxios} = useContext(FetchContext)
-  const [isLoading, setIsLoading] = useState(false)
+  const { authAxios } = useContext(FetchContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [successPopup, setSuccessPopup] = useState(false);
   const [errorPopup, setErrorPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [redirectOnSuccess, setRedirectOnSuccess] = useState(false);
-  
-  
+
   const handleOnChange = (e) => {
     setFile(e.target.files[0]);
-  }
-  
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const formData = new FormData();
       formData.append("csv", file);
-      const {data} = await authAxios.post("/upload-csv/transaction", formData);
+      formData.append("title", title);
+      await authAxios.post(
+        "/upload-csv/transaction",
+        formData
+      );
       setSuccessPopup(true);
       setTimeout(() => {
         setRedirectOnSuccess(true);
@@ -40,15 +43,41 @@ const AddReport = () => {
 
   return (
     <form className="add-report" onSubmit={handleSubmit}>
-    {redirectOnSuccess && <Redirect to ="/reports" />}
-    {successPopup && <Popup type="success" text="Record Successful Created" setSuccessPopup={setSuccessPopup} />}
-      {errorPopup && <Popup type="error" text={errorMessage} setErrorPopup={setErrorPopup} />}
+      {redirectOnSuccess && <Redirect to="/reports" />}
+      {successPopup && (
+        <Popup
+          type="success"
+          text="Record Successful Created"
+          setSuccessPopup={setSuccessPopup}
+        />
+      )}
+      {errorPopup && (
+        <Popup type="error" text={errorMessage} setErrorPopup={setErrorPopup} />
+      )}
       <h3>Add Data</h3>
-      <div className="container">
-        <label className="dropzone" htmlFor="files">select trasaction csv file</label>
-        <input id="files" type="file" onChange={(e) => handleOnChange(e)} />
-      </div>
-      <button>{isLoading ? <div><VscTriangleUp className="spinner" /><span>Please wait...</span></div> : <span>Create</span>}</button>
+      <input
+        id="title"
+        type="text"
+        placeholder="Title..."
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <input
+        id="files"
+        type="file"
+        placeholder="Select Transaction CSV files..."
+        onChange={(e) => handleOnChange(e)}
+      />
+      <button>
+        {isLoading ? (
+          <div>
+            <VscTriangleUp className="spinner" />
+            <span>Please wait...</span>
+          </div>
+        ) : (
+          <span>Create</span>
+        )}
+      </button>
     </form>
   );
 };

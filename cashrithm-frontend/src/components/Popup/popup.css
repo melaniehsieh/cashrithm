@@ -2,32 +2,65 @@
   position: absolute;
   width: 50%;
   padding: .5rem 0 1rem;
-  left: 6px;
-  top: 4px;
+  left: 2rem;
+  top: 10px;
   display: grid;
-  align-content: center;
-  justify-content: center;
+  /*align-content: center;
+  justify-content: center;*/
   font-weight: 700;
+  z-index: 99999;
   animation: flipIn .3s linear;
 }
 
 .success {
-  background: #a9ed72c7;
   color: green;
-  border-top: 3px solid green;
+  border-top: 5px solid green;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 16%);
+  border-radius: 1rem;
   /*border: 1px solid green;
+  background: #a9ed72c7;
   border-radius: .5rem;*/
 }
-.error {
-  background: #d86d6dd1;
+
+.success__label {
+  margin: 0 0 .5rem 0;
+  text-align: left;
+  font-size: 1.5rem;
+}
+
+.success__text {
+  text-align: left;
+  margin: 0 0 .5rem 0;
   color: black;
-  border-top: 3px solid red;
+  font-style: italic;
+  padding: 0 0 0 1rem;
+}
+
+.error {
+  color: red;
+  border-top: 5px solid red;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 16%);
+  border-radius: 1rem;
   /*border-radius: .5rem;
   border: 1px solid red;*/
 }
 
 .popup__btn {
   padding: 0 .5rem 0;
+}
+
+.error__label {
+  margin: 0 0 .5rem 0;
+  text-align: left;
+  font-size: 1.5rem;
+}
+
+.error__text {
+  text-align: left;
+  margin: 0 0 .5rem 0;
+  color: black;
+  font-style: italic;
+  padding: 0 0 0 1rem;
 }
 
 @keyframes flipIn {

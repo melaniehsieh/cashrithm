@@ -4,27 +4,29 @@
 
 nav {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 70% 30%;
   background: white;
   height: 5rem;
   align-content: center;
   justify-content: center;
   text-align: center;
+  padding: 0 1rem;
 }
 
 .user__nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 10rem;
+  width: 13rem;
   grid-gap: 0.5rem;
   border-radius: 1rem;
   align-content: center;
   justify-self: center;
+  box-shadow: 6px 6px 20px 0 rgba(0, 0, 0, 16%);
 }
 
 .user__name {
   border-radius: 1rem;
-  padding: 0.5rem;
+  padding: 1rem;
   width: 4rem;
   font-weight: 700;
 }
@@ -35,16 +37,20 @@ nav {
 }
 
 .btn__logout {
-  box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
+  padding: 1rem;
   background: rgba(0, 0, 0, 16%);
   font-weight: 700;
   border-radius: 1rem;
 }
 
 .brand {
-  font: 25px "Arial-MTB";
+  font: 30px "Arial-MTB";
   text-decoration: none;
   color: black;
+  font-weight: 700;
+  display: grid;
+  justify-content: start;
+  align-content: center;
 }
 
 @media screen and (max-width: 768px) {
