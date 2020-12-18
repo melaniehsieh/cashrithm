@@ -1,6 +1,5 @@
 @media screen and (min-width: 768px) {
   .report-list {
-<<<<<<< HEAD
     display: grid;
     grid-template-columns: 70% 30%;
     background-color: #f0f0f0;
@@ -118,23 +117,11 @@
     background-color: #f0f0f0;
     padding: 2em;
   }
-
-=======
-    display: flex;
-    justify-content: space-between;
-    background-color: #f0f0f0;
-    padding: 2em 15em;
-  }
-
->>>>>>> 018f58f26fd18939020b794442e2b54d821aa632
   .report {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: 1rem;
-<<<<<<< HEAD
     overflow: hidden;
-=======
->>>>>>> 018f58f26fd18939020b794442e2b54d821aa632
   }
 
   .record h2 {
@@ -173,9 +160,6 @@
   .expense-figure {
     color: #5840ed;
   }
-
-<<<<<<< HEAD
-=======
   .records-container a {
     display: flex;
     flex-direction: column;
@@ -279,8 +263,6 @@
   .expense-figure {
     color: #5840ed;
   }
-
->>>>>>> 018f58f26fd18939020b794442e2b54d821aa632
   .records-container a {
     display: flex;
     flex-direction: column;

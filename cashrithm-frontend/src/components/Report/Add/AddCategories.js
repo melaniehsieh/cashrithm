@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useState, useContext } from "react";
-=======
-import React, { useState, useEffect, useContext } from "react";
->>>>>>> 018f58f26fd18939020b794442e2b54d821aa632
 import { Redirect } from "react-router-dom";
 import { FetchContext } from "../../../context/FetchContext";
 import "./styles.css";
@@ -38,11 +34,7 @@ const AddCategories = () => {
     try {
       const formData = new FormData();
       formData.append("csv", file);
-<<<<<<< HEAD
       await authAxios.post("/upload-csv/category", formData);
-=======
-      const { data } = await authAxios.post("/upload-csv/category", formData);
->>>>>>> 018f58f26fd18939020b794442e2b54d821aa632
       setSuccessPopup(true);
       setTimeout(() => {
         setRedirectOnSuccess(true);
