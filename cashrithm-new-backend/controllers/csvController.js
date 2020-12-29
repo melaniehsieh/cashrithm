@@ -12,6 +12,7 @@ const Entities = require("../model/entitiesModel");
 const CategoryCSV = require("../model/categoryModel");
 const ThrowError = require("../utils/ThrowError");
 const wrapAsync = require("../utils/wrapAsync");
+const {checkGreaterThan} = require("../utils/helper");
 
 
 // Multer Configuration
@@ -44,71 +45,140 @@ const upload = multer({
 
 exports.uploadCSV = upload.single('csv');
 
+// Transform transaction file
 const transformedData = (data, type) => {
   return data.map((el) => {
     return Object.fromEntries(
       Object.entries(el).map(([key, value]) => {
         //key = "type";
         if(key === "_id") {
-          key = `${type}Vendor`;
+          key = `${type}_vendor`;
         }
         return [key, value];
       })
     );
   });
-}
+};
 
+
+// Calculate total expense 
 const calcTotalExpense = async (userId, csvId) => {
   const data = await CSV.aggregate([
     { $match: { select: "expense", user: userId, csvId } },
     { $group: {
       //_id: "$Select",
       _id: "$vendor",
-      totalExpense: {$sum: "$amount"}
+      total_expense: {$sum: "$amount"}
       //numberDoc: {$sum: 1}
     } }
   ]);
   
+  // Transform the calculated data
   return transformedData(data, "expense");
 };
 
+// calculate total revenue
 const calcTotalRevenue = async (userId, csvId) => {
   const data =  await CSV.aggregate([
     { $match: { select: "revenue", user: userId, csvId } },
     { $group: {
       //_id: "$Select",
       _id: "$vendor",
-      totalRevenue: {$sum: "$amount"}
+      total_revenue: {$sum: "$amount"}
       //numberDoc: {$sum: 1}
     } }
   ]);
   
+  // Transform the calculated data
   return transformedData(data, "revenue");
 };
 
-const transformTransactionDoc = (el, req, num) => {
-  const transformedData = Object.fromEntries(
-    Object.entries(el).map(([key, value]) => {
-      return [key.toLowerCase(), value];
-    })
-  );
+const retrieveUserCategoryAndGroup = async (userId, totalDifference) => {
+  const data = await Entities.findOne({user: userId});
+  
+  const newData = data.category.map(parentEl => {
+    const newObj = [];
+    totalDifference.map(el => {
+      if(parentEl.vendors.length > 1) {
+        parentEl.vendors.map(vendor => {
+          if(vendor.trim() === el.vendor.trim()) {
+            newObj.push({vendor, value: el.revenue_expense_difference});
+          };
+        });
+      }
       
-  // Converting to number
-  transformedData.amount = parseInt(transformedData.amount, 10);
+      if(parentEl.vendors.includes(el.vendor)) {
+        newObj.push({vendor: parentEl[0], value: el.revenue_expense_difference});
+      }
+    });
+    return { category: parentEl.type, vendor_details: newObj};
+  });
   
-  // Transforming to toLowerCase
-  transformedData.select = transformedData.select.toLowerCase();
-  transformedData.option = transformedData.option.toLowerCase();
-  transformedData.vendor = transformedData.vendor.toLowerCase();
-  
-  // Getting logged in user from req object
-  transformedData.user = req.user._id;
-  transformedData.csvId = num;
-  //console.log(transformedData);
-    
-  return transformedData;
+  /*console.log(data.category);
+  console.log(totalDifference);
+  console.log(JSON.stringify(newData));*/
+  return newData;
 };
 
+const differenceTotalRevenueExpenseByVendor = async (userId, csvId) => {
+  
+  const totalRevenueByVendor = await calcTotalRevenue(userId, csvId);
+  const totalExpenseByVendor = await calcTotalExpense(userId, csvId);
+  
+  // Lets just assumed both the total revenue and expense will be of the same length
+  const totalDifference = totalRevenueByVendor.map((revenueEl, i) => {
+    const newObj = {};
+    
+    totalExpenseByVendor.map((expenseEl, i) => {
+      if(revenueEl.revenue_vendor === expenseEl.expense_vendor){
+        newObj["vendor"] = revenueEl.revenue_vendor;
+        newObj["revenue_expense_difference"] = revenueEl.total_revenue - expenseEl.total_expense;
+        //return newObj;
+      }
+      return;
+    });
+    return newObj;
+  });
+  
+  //console.log(totalExpenseByVendor);
+  //console.log(totalRevenueByVendor);
+  //console.log(totalDifference);
+  return retrieveUserCategoryAndGroup(userId, totalDifference);
+};
+
+
+// Transform transaction file of options
+const transformedGroupedOptionData = (data) => {
+  return data.map((el) => {
+    return Object.fromEntries(
+      Object.entries(el).map(([key, value]) => {
+        //key = "type";
+        if(key === "_id") {
+          key = `option`;
+        }
+        if(value === "") {
+          value = "no option"
+        };
+        return [key, value];
+      })
+    );
+  });
+};
+
+// calculate total grouped by option
+const groupByOptionAndCalculateTotal = async (userId, csvId) => {
+  const  data = await CSV.aggregate([
+    { $match: { user: userId, csvId }},
+    { $group: {
+      _id: "$option",
+      total_by_option: {$sum: "$amount"}
+    } }
+  ]);
+  
+  return transformedGroupedOptionData(data);
+};
+
+// Updating the current logged in user Entities transaction
 const updateUserTransaction = wrapAsync(async (data, req, next) => {
   const userEntities = await Entities.findOne({user:req.user._id});
   
@@ -121,29 +191,8 @@ const updateUserTransaction = wrapAsync(async (data, req, next) => {
   
   return y;
 });
-/*
-const updateCurrentUserRevenue = wrapAsync(async (datRevenue, req, next) => {
-  const userEntities = await Entities.findOne({user:req.user._id});
-  
-  const y = await Entities.findByIdAndUpdate(userEntities._id, {
-    $push: {transactionRevenue: datRevenue}
- }, {
-    new: true,
-    runValidators: true
-  });
-});
 
-const updateCurrentUserExpense = wrapAsync(async (datExpense, req, next) => {
-  const userEntities = await Entities.findOne({user:req.user._id});
-      
-  const y = await Entities.findByIdAndUpdate(userEntities._id, {
-    $push: {transactionExpense: datExpense}
- }, {
-    new: true,
-    runValidators: true
-  });
-});
-*/
+// Calculating and updating current logged in user category
 const calcAndUpdateCurrentCategory = wrapAsync(async (req) => {
    const data = await CategoryCSV.aggregate([
       { $match: { user: req.user._id } },
@@ -180,6 +229,7 @@ const calcAndUpdateCurrentCategory = wrapAsync(async (req) => {
    });
 });
 
+// Used to transform all total revenue and expense without grouping
 const transformDataFunc = (data) => {
   return data.map((el) => {
     return Object.fromEntries(
@@ -195,13 +245,14 @@ const transformDataFunc = (data) => {
 };
 
 
-const calculateAndUpdateTotalRevenueExpense = async (req, csvId) => {
+// Calculate all total revenue and expense without grouping
+const calculateAllTotalRevenueExpense = async (req, csvId) => {
   const totalRevenue = await CSV.aggregate([
     { $match: { select: "revenue", user: req.user._id, csvId } },
     { $group: {
       _id: "$select",
       //_id: "$vendor",
-      allTotalRevenue: {$sum: "$amount"}
+      all_total_revenue: {$sum: "$amount"}
       //numberDoc: {$sum: 1}
     } }
   ]);
@@ -211,7 +262,7 @@ const calculateAndUpdateTotalRevenueExpense = async (req, csvId) => {
     { $group: {
       _id: "$select",
       //_id: "$vendor",
-      allTotalExpense: {$sum: "$amount"}
+      all_total_expense: {$sum: "$amount"}
       //numberDoc: {$sum: 1}
     } }
   ]);
@@ -224,20 +275,33 @@ const calculateAndUpdateTotalRevenueExpense = async (req, csvId) => {
     
   const combinedData = {...dt1[0], ...dt2[0]}
   return combinedData;
-  //console.log(combinedData);
-  /*
-   // Retrieve the current user Entities from the currently logged in user
-    const userEntities = await Entities.findOne({user:req.user._id});
-   
-   // Update the current user entities object with the transformed category data
-    const updatedEntities = await Entities.findByIdAndUpdate(userEntities._id, {
-      $push: {totalRevenueExpense: combinedData}
-   }, {
-     new: true,
-     runValidators: true
-   });*/
 };
 
+// Transform transaction document
+const transformTransactionDoc = (el, req, num) => {
+  const transformedData = Object.fromEntries(
+    Object.entries(el).map(([key, value]) => {
+      return [key.toLowerCase(), value];
+    })
+  );
+      
+  // Converting to number
+  transformedData.amount = parseInt(transformedData.amount, 10);
+  
+  // Transforming to toLowerCase
+  transformedData.select = transformedData.select.toLowerCase();
+  transformedData.option = transformedData.option.toLowerCase();
+  transformedData.vendor = transformedData.vendor.toLowerCase();
+  
+  // Getting logged in user from req object
+  transformedData.user = req.user._id;
+  transformedData.csvId = num;
+  //console.log(transformedData);
+    
+  return transformedData;
+};
+
+// Beginning of uploading transaction file
 exports.uploadTransactionCsv = wrapAsync(async (req, res, next) => {
     if(!req.file) {
       return next(new ThrowError(400, "Please upload a transaction csv"));
@@ -269,50 +333,57 @@ exports.uploadTransactionCsv = wrapAsync(async (req, res, next) => {
     // Insert all the csv file parsed
     const doc = await CSV.insertMany(newParsedData);
     // Calculate and update total revenue and expense
-    const newDat = await calculateAndUpdateTotalRevenueExpense(req, newParsedData[newParsedData.length - 1].csvId);
-    console.log(newDat);
+    const allTotalRevenueExpense = await calculateAllTotalRevenueExpense(req, newParsedData[newParsedData.length - 1].csvId);
     
-    // Calculate total expense
-    const dat = await calcTotalExpense(req.user._id, newParsedData[newParsedData.length - 1].csvId);
-    //const datExpense = {expense: dat};
+    // User category group by vendors
+    const total = await differenceTotalRevenueExpenseByVendor(req.user._id, newParsedData[newParsedData.length - 1].csvId);
     
-    // calculate total revenue
-    const dat2 = await calcTotalRevenue(req.user._id, newParsedData[newParsedData.length - 1].csvId);
-    //const datRevenue = {revenue: dat2};
-
+    // Calculate and group by option
+    const optionData = await groupByOptionAndCalculateTotal(req.user._id, newParsedData[newParsedData.length - 1].csvId);
+    
+    /*console.log(allTotalRevenueExpense);
+    console.log(total);
+    console.log(optionData);*/
+    
+    // Creating the overall document
+    let document = {
+      title: req.body.title,
+      ...allTotalRevenueExpense,
+      total_doc_by_option: optionData,
+      category_by_vendor: total
+    };
+    
     
     // NOTE NOT YET FINALIZED
-    let val;
+    /*let val;
     if(dat.length >= dat2.length) {
       const doc = dat.map((el, i) => {
         const s = {...el, ...dat2[i]};
         return s;
       });
-      val = {doc, ...newDat, title: req.body.title };
+      val = {doc, total_doc_by_option: optionData, ...newDat, title: req.body.title };
       //console.log(`${dat.length} is bigger than ${dat2.length}`);
     } else if (dat2.length >= dat.length) {
       const doc = dat2.map((el, i) => {
         const s = {...el, ...dat[i]};
         return s;
       });
-      val = {doc, ...newDat, title: req.body.title };
+      val = {doc, total_doc_by_option: optionData, ...newDat, title: req.body.title };
       //console.log(`${dat.length} is bigger than ${dat2.length}`);
-    }
-    
-    console.log(val);
+    }*/
     
     // Update user transaction
-    const trasac = await updateUserTransaction(val, req, next)
+    const trasac = await updateUserTransaction(document, req, next)
     
     res.status(200).json({
       status: "success",
       processedDoc: trasac,
-      length: doc.length,
+      result: doc.length,
       data: doc
     });
 });
 
-// Category csv
+// beginning of uploading Category csv
 exports.uploadCategoryCsv = wrapAsync(async (req, res, next) => {
     if(!req.file) {
       return next(new ThrowError(400, "Please upload a category csv"));
@@ -369,6 +440,8 @@ exports.uploadCategoryCsv = wrapAsync(async (req, res, next) => {
 });
 
 
+// Remaining RESTFUL API endpoint
+
 // Get all csv documents
 exports.getAllTransactionCSVDoc = wrapAsync(async (req, res, next) => {
   const data = await CSV.find({});
@@ -407,6 +480,9 @@ exports.deleteAllCategoryCSVDoc = wrapAsync(async (req, res, next) => {
     status: "success"
   });
 });
+
+
+
 
 exports.calcBasedOnSelectRevenue = wrapAsync(async (req, res, next) => {
   const data = await CSV.aggregate([

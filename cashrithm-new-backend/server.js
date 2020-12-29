@@ -102,6 +102,7 @@ const main = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false
   }, (error) => {
       console.log(colors.yellow(`Database connected`));
       if (error) throw error;

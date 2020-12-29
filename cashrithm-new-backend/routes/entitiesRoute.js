@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const {getAllUserEntities, getUserEntities, deleteUserEntities, getLoggedInUserEntities, getUserRecord} = require("../controllers/entitiesController");
+const {getAllUserEntities, getUserEntities, deleteUserEntities, deleteAllUserEntities, getLoggedInUserEntities, getUserRecord} = require("../controllers/entitiesController");
 const { protect, restrictTo } = require("../controllers/authController");
 
 router
@@ -17,12 +17,12 @@ router
 router
   .route("/")
   .get(getAllUserEntities)
-  //.delete(deleteAllUserEntities)
+  .delete(protect, restrictTo("admin"), deleteAllUserEntities)
 
 router
   .route("/:id")
   .get(protect, getUserEntities)
   .patch()
-  .delete(deleteUserEntities);
+  .delete(protect, restrictTo("admin"), deleteUserEntities);
   
 module.exports = router;

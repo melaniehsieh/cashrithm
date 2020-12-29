@@ -1,0 +1,28 @@
+Date,Vendor,Amount,Select,Option
+4/3, Starbucks,20,Revenue,debt
+4/4, Darden Restaurant,10,Revenue,
+4/5, Amazon,440,Expense,prepay
+4/6, GoPro,5000,Revenue,
+4/7, Tesco,"20,000",Revenue,equitity
+4/8, Starbucks,12,Revenue,
+4/9, Google,314,Expense,prepay
+4/10, Google,435,Revenue,
+4/11, MCD,23,Expense,
+4/12, Tesco,34,Revenue,
+4/13, Darden Restaurant,67,Expense,
+4/14, Amazon,68,Revenue,equitity
+4/15, Google,79,Revenue,
+4/16, Google,231,Expense,asset
+4/17, Tesco,50,Revenue,
+4/18, Starbucks,345,Revenue,
+4/19, MCD,663,Revenue,
+4/20, GoPro,453,Expense,
+4/21, Darden Restaurant,248,Expense,debt
+4/22, Starbucks,12,Revenue,
+4/23, GoPro,512,Expense,asset
+4/24, MCD,56,Revenue,
+4/25, Darden Restaurant,224,Revenue,debt
+4/26, Tesco,344,Revenue,
+4/27, Amazon,34,Expense,
+4/27, Darden Restaurant,341,Revenue,
+4/27, MCD,56,Expense,

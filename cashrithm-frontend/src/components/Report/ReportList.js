@@ -11,9 +11,8 @@ const ReportList = () => {
   //const authContext = useContext(AuthContext);
   const fetchContext = useContext(FetchContext);
   const [entities, setEntities] = useState({});
-  const [errorPopup, setErrorPopup] = useState("");
+  const [errorPopup, setErrorPopup] = useState(false);
   const [entitiesError, setEntitiesError] = useState("");
-  const [redirectOnSuccess, setRedirectOnSuccess] = useState(false);
 
   const fetchEntities = async () => {
     try {
@@ -22,9 +21,9 @@ const ReportList = () => {
       );
       setEntities(data.entities);
     } catch (e) {
+      setErrorPopup(true)
       setEntitiesError(e.response.data.message);
       console.log(e);
-      setRedirectOnSuccess(true);
     }
   };
 
@@ -36,7 +35,6 @@ const ReportList = () => {
   //console.log(entitiesError);
   return (
     <div>
-      {redirectOnSuccess && <Redirect to="/login" />}
       {errorPopup && (
         <Popup type="error" text={entitiesError} setErrorPopup={setErrorPopup} />
       )}
@@ -47,7 +45,7 @@ const ReportList = () => {
             ? entities.transaction.map((el) => {
                 return <Report doc={el} key={el._id} />;
               })
-            : ""}
+            : "loading..."}
         </div>
         <div className="records-container">
           <Link to="/add">Create New Record</Link>
@@ -67,7 +65,7 @@ const CategoryNav = ({ entities }) => {
         ? entities.category.map((el) => {
             return <SubCategoryNav key={el._id} category={el} />;
           })
-        : ""}
+        : "loading..."}
     </div>
   );
 };

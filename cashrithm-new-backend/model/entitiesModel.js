@@ -5,58 +5,39 @@ const categorySchema= new mongoose.Schema({
   vendors: [String]
 });
 /*
-const childRevenueSchema = new mongoose.Schema({
-  vendor: String,
-  totalRevenue: Number
-});
-
-const childExpenseSchema = new mongoose.Schema({
-  vendor: String,
-  totalExpense: Number
-});
-
-const transactionRevenueSchema = new mongoose.Schema({
-  revenue: [childRevenueSchema],
-  createdAt: {
-    type: Date,
-    default: new Date()
-  }
-});
-
-const transactionExpenseSchema = new mongoose.Schema({
-  expense: [childExpenseSchema],
-  createdAt: {
-    type: Date,
-    default: new Date()
-  } 
-});*/
-
 const childTransactionSchema = new mongoose.Schema({
   expenseVendor: String,
   totalExpense: Number,
   revenueVendor: String,
   totalRevenue: Number
+});*/
+const subChildTransactionSchema = new mongoose.Schema({
+  vendor: String,
+  value: Number
+});
+
+const childTransactionSchema = new mongoose.Schema({
+  category: String,
+  vendor_details: [subChildTransactionSchema]
+})
+
+const childOptionSchema = new mongoose.Schema({
+  option: String,
+  total_by_option: String
 });
 
 const transactionSchema = new mongoose.Schema({
   title: String,
-  allTotalRevenue: Number,
-  allTotalExpense: Number,
-  doc: [childTransactionSchema],
+  all_total_revenue: Number,
+  all_total_expense: Number,
+  category_by_vendor: [childTransactionSchema],
+  total_doc_by_option: [childOptionSchema],
   createdAt: {
     type: Date,
     default: new Date()
   } 
 });
-/*
-const revenueExpenseSchema = new mongoose.Schema({
-  totalExpense: Number,
-  totalRevenue: Number,
-  createdAt: {
-    type: Date,
-    default: new Date()
-  }
-});*/
+
 
 const entitiesSchema = new mongoose.Schema({
   name: String,
@@ -67,9 +48,6 @@ const entitiesSchema = new mongoose.Schema({
   },
   category: [categorySchema],
   transaction: [transactionSchema],
-  /*transactionExpense: [transactionExpenseSchema],
-  transactionRevenue: [transactionRevenueSchema],
-  totalRevenueExpense: [revenueExpenseSchema],*/
   createdAt: {
     type: Date,
     default: new Date()

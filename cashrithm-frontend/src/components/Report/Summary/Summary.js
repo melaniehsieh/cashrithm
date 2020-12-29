@@ -8,25 +8,25 @@ const Summary = () => {
   console.log(useParams());
   const { id } = useParams();
   const fetchContext = useContext(FetchContext);
-  const [record, setRecord] = useState({});
-  const [category, setCategory] = useState([]);
+  const [record, setRecord] = useState([]);
+  //const [category, setCategory] = useState([]);
   const [error, setError] = useState("");
-  const [categoryError, setCategoryError] = useState("");
+  //const [categoryError, setCategoryError] = useState("");
 
   const getRecord = async () => {
     try {
       const { data } = await fetchContext.authAxios.get(
         `/entities/user-record/${id}`
       );
-      setRecord(data.record);
-      //console.log(data);
+      setRecord(data);
+      console.log(data);
     } catch (e) {
       setError(e.response.data.message);
       //console.log(e);
     }
   };
 
-  const getCategory = async () => {
+  /*const getCategory = async () => {
     try {
       const { data } = await fetchContext.authAxios.get(
         "/entities/user-entities"
@@ -37,11 +37,11 @@ const Summary = () => {
       setCategoryError(e.response.data.message);
       //console.log(e);
     }
-  };
+  };*/
 
   useEffect(() => {
     getRecord();
-    getCategory();
+    //getCategory();
   }, []);
 
   return (
@@ -72,18 +72,27 @@ const Summary = () => {
           <p>121,187.04</p>
         </div>
       </div>
-
-      <div className="category">
+      <Category />
+      {/*<div className="category">
         {category
           ? category.map((el) => {
               return <Category record={record} key={el._id} el={el} />;
             })
           : ""}
-      </div>
+      </div>*/}
     </div>
   );
 };
 
+const Category = () => {
+  return(
+    <div>
+    category
+    </div>
+  );
+}
+
+/*
 const Category = ({ el, record }) => {
   return (
     <div>
@@ -124,5 +133,5 @@ const Category = ({ el, record }) => {
     </div>
   );
 };
-
+*/
 export default Summary;

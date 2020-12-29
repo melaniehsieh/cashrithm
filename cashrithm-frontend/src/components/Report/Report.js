@@ -29,11 +29,11 @@ const Report = ({ doc }) => {
           <h2>{doc.title && doc.title}</h2>
           <p>
             Revenue
-            <span className="revenue-figure">$ {doc.allTotalRevenue}</span>
+            <span className="revenue-figure">$ {doc.all_total_revenue}</span>
           </p>
           <p>
             Expense
-            <span className="expense-figure">$ {doc.allTotalExpense}</span>
+            <span className="expense-figure">$ {doc.all_total_expense}</span>
           </p>
         </a>
       </div>

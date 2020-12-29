@@ -1,19 +1,19 @@
 const express = require("express");
 const { getAllTransactionCSVDoc, deleteAllTransactionCSVDoc, getAllCategoryCSVDoc, deleteAllCategoryCSVDoc, calcBasedOnSelect, calcBasedOnSelectRevenue, categorizeByVendor } = require("../controllers/csvController")
-const {protect} = require("../controllers/authController");
+const {protect, restrictTo} = require("../controllers/authController");
 
 
 const router = express.Router();
 
 router
   .route("/transaction")
-  .get(getAllTransactionCSVDoc)
-  .delete(deleteAllTransactionCSVDoc);
+  .get(protect, getAllTransactionCSVDoc)
+  .delete(protect, restrictTo("admin"), deleteAllTransactionCSVDoc);
  
 router
   .route("/category")
-  .get(getAllCategoryCSVDoc)
-  .delete(deleteAllCategoryCSVDoc);
+  .get(protect, getAllCategoryCSVDoc)
+  .delete(protect, restrictTo("admin"), deleteAllCategoryCSVDoc);
   
 
 router
