@@ -98,10 +98,12 @@ const retrieveUserCategoryAndGroup = async (userId, totalDifference) => {
   
   const newData = data.category.map(parentEl => {
     const newObj = [];
+    let total = 0;
     totalDifference.map(el => {
       if(parentEl.vendors.length > 1) {
         parentEl.vendors.map(vendor => {
           if(vendor.trim() === el.vendor.trim()) {
+            total += el.revenue_expense_difference;
             newObj.push({vendor, value: el.revenue_expense_difference});
           };
         });
@@ -111,7 +113,7 @@ const retrieveUserCategoryAndGroup = async (userId, totalDifference) => {
         newObj.push({vendor: parentEl[0], value: el.revenue_expense_difference});
       }
     });
-    return { category: parentEl.type, vendor_details: newObj};
+    return { category: parentEl.type, total, vendor_details: newObj};
   });
   
   /*console.log(data.category);

@@ -18,6 +18,7 @@ const subChildTransactionSchema = new mongoose.Schema({
 
 const childTransactionSchema = new mongoose.Schema({
   category: String,
+  total: Number,
   vendor_details: [subChildTransactionSchema]
 })
 

@@ -59,26 +59,33 @@
     width: 100vw;
     background-color: #ffffff;
     min-height: 100vh;
-    width: 80%;
-    margin: 0 auto;
+    width: 95%;
+    margin: 2rem auto;
+    /*border: 1px solid black;*/
   }
 
   .summary-container .back {
-    width: 100%;
-    padding-left: 5em;
-    padding-top: 2em;
+    width: 90%;
+    padding-left: 2em;
+    padding-top: 1em;
     align-items: left;
     text-align: left;
     text-decoration: none;
+    /*border: 1px solid blue;*/
   }
 
   .summary-container a,
-  .summary-container a:visited,
-  .summary-title {
+  .summary-container a:visited {
     text-decoration: none;
     color: black;
     font: 1.3rem "Futura";
-    line-height: 150%;
+    line-height: 100%;
+  }
+  
+  .summary-title {
+    width: 100%;
+    /*font-size: 1.1rem;*/
+    /*border: 1px solid black;*/
   }
 
   .summary-container a:hover {
@@ -90,13 +97,69 @@
     flex: 1 1;
   }
 
-  .summary {
+  /*.summary {
     width: 50%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     font: 1em "Futura";
+  }*/
+  .summary {
+    width: 70%;
+    display: grid;
+    font: 1em "Futura";
+    margin: 0 0 5rem 0;
+    /*border: 1px solid black;*/
   }
+  
+  .summary-header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+    /*border: 1px solid blue;*/
+  }
+  
+  .summary-header h4:nth-child(2) {
+    text-align: right;
+  }
+  
+  .summary-content {
+    width: 100%;
+    /*border: 1px solid red;*/
+  }
+  
+  .summary-content-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    text-align: left;
+    /*border: 1px solid green;*/
+  }
+  
+  .summary-content-text p:nth-child(2) {
+    text-align: right;
+  }
+  
+  .sub-summary-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+    margin: .5rem auto;
+    align-content: center;
+    text-align: left;
+    color: gray;
+    /*border: 1px solid yellow;*/
+  }
+  
+  .sub-summary-content p:nth-child(2) {
+    text-align: right;
+  }
+  
+  .summary-content p {
+    height: .3rem;
+  }
+
 
   .summary .left {
     text-align: left;

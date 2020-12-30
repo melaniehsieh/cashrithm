@@ -18,11 +18,11 @@ const Summary = () => {
       const { data } = await fetchContext.authAxios.get(
         `/entities/user-record/${id}`
       );
-      setRecord(data);
-      console.log(data);
+      setRecord(data.record);
+      //console.log(data);
     } catch (e) {
       setError(e.response.data.message);
-      //console.log(e);
+      console.log(e);
     }
   };
 
@@ -43,17 +43,49 @@ const Summary = () => {
     getRecord();
     //getCategory();
   }, []);
-
+  console.log(record);
+  console.log(record.total_doc_by_option);
+  
+  const renderedOption = record.total_doc_by_option ? record.total_doc_by_option.map(el => {
+    return <div className="summary-content-text" key={el._id}>
+        <p>{el.option[0].toUpperCase() + el.option.substring(1)}</p>
+        <p>{el.total_by_option}</p>
+      </div>
+  }) : "loading";
+  
+  const renderedCategoryValue = record.category_by_vendor ? record.category_by_vendor.map(el => {
+    return <CategoryValue key={el._id} el={el} />
+  }) : "loading";
+  
   return (
     <div className="summary-container">
       <div className="back">
         <Link to="/reports">← Back</Link>
       </div>
       <div className="summary-title">
-        <h2>Feburary Monthly Summary</h2>
+        <h2>{record.title && `${record.title} Summary`}</h2>
+      </div>
+      <div className="summary">
+        <div className="summary-header">
+          <h4>All Branch Values</h4>
+          <h4>Amount($)</h4>
+        </div>
+        <div className="summary-content">
+          {renderedOption}
+        </div>
+      </div>
+      
+      <div className="summary">
+        <div className="summary-header">
+          <h4>Category</h4>
+          <h4>Amount($)</h4>
+        </div>
+        <div className="summary-content">
+          {renderedCategoryValue}
+        </div>
       </div>
 
-      <div className="summary">
+      {/*<div className="summary">
         <h4>All Branch Values</h4>
         <h4>Amount($)</h4>
       </div>
@@ -71,8 +103,8 @@ const Summary = () => {
           <p>10,821.71</p>
           <p>121,187.04</p>
         </div>
-      </div>
-      <Category />
+      </div>*/}
+      {/*<Category />*/}
       {/*<div className="category">
         {category
           ? category.map((el) => {
@@ -84,12 +116,29 @@ const Summary = () => {
   );
 };
 
-const Category = () => {
-  return(
-    <div>
-    category
+const CategoryValue = ({el}) => {
+  const [showSummary, setShowSummary] = useState(false);
+  
+  const changeSummary = (e) => {
+    setShowSummary(!showSummary)
+  }
+  
+  return <div onClick={changeSummary} className="summary-category-value">
+    <div className="summary-content-text">
+        <p>{el.category[0].toUpperCase() + el.category.substring(1)}</p>
+        <p>{el.total}</p>
     </div>
-  );
+    <div className="sub-summary">
+      {
+        showSummary && el.vendor_details.map(el => {
+          return <div className="sub-summary-content" key={el._id}>
+        <p>{el.vendor}</p>
+        <p>{el.value}</p>
+      </div>
+        })
+      }
+    </div>
+  </div>
 }
 
 /*
