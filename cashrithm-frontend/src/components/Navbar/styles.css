@@ -4,20 +4,17 @@
 
 nav {
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 80% 20%;
   background: white;
-  height: 5rem;
   align-content: center;
   justify-content: center;
   text-align: center;
-  padding: 0 1rem;
+  padding: 1% 15%;
 }
 
 .user__nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 13rem;
-  grid-gap: 0.5rem;
   border-radius: 1rem;
   align-content: center;
   justify-self: center;
@@ -27,8 +24,7 @@ nav {
 .user__name {
   border-radius: 1rem;
   padding: 1rem;
-  width: 4rem;
-  font-weight: 700;
+  font: 15px "Futura";
 }
 
 .btn {
@@ -37,65 +33,22 @@ nav {
 }
 
 .btn__logout {
-  padding: 1rem;
+  font: 15px "Futura";
   background: rgba(0, 0, 0, 16%);
-  font-weight: 700;
   border-radius: 1rem;
 }
 
+.btn__logout:hover {
+  cursor: pointer;
+  background: #00a55a;
+  color: #fff;
+}
+
 .brand {
-  font: 30px "Arial-MTB";
+  font: 25px "Arial-MTB";
   text-decoration: none;
   color: black;
-  font-weight: 700;
   display: grid;
   justify-content: start;
   align-content: center;
-}
-
-@media screen and (max-width: 768px) {
-  nav {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    background: white;
-    height: 5rem;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .user__nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 10rem;
-    grid-gap: 0.5rem;
-    border-radius: 1rem;
-    align-content: center;
-    justify-self: center;
-  }
-
-  .user__name {
-    border-radius: 1rem;
-    padding: 0.5rem;
-    width: 4rem;
-    font-weight: 700;
-  }
-
-  .btn {
-    border: none;
-    background: none;
-  }
-
-  .btn__logout {
-    box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
-    background: rgba(0, 0, 0, 16%);
-    font-weight: 700;
-    border-radius: 1rem;
-  }
-
-  .brand {
-    font: 25px "Arial-MTB";
-    text-decoration: none;
-    color: black;
-  }
 }

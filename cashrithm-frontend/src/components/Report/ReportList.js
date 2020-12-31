@@ -21,7 +21,7 @@ const ReportList = () => {
       );
       setEntities(data.entities);
     } catch (e) {
-      setErrorPopup(true)
+      setErrorPopup(true);
       setEntitiesError(e.response.data.message);
       console.log(e);
     }
@@ -36,7 +36,11 @@ const ReportList = () => {
   return (
     <div>
       {errorPopup && (
-        <Popup type="error" text={entitiesError} setErrorPopup={setErrorPopup} />
+        <Popup
+          type="error"
+          text={entitiesError}
+          setErrorPopup={setErrorPopup}
+        />
       )}
       <Navbar />
       <div className="report-list">
@@ -49,7 +53,9 @@ const ReportList = () => {
         </div>
         <div className="records-container">
           <Link to="/add">Create New Record</Link>
-          <Link to="/category">Create New Category </Link>
+          <Link to="/category" style={{ margin: "1em 0" }}>
+            Create New Category
+          </Link>
           <CategoryNav entities={entities} />
         </div>
       </div>
