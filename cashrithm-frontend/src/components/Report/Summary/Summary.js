@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext, createContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FetchContext } from "../../../context/FetchContext";
+import Loading from "../../Loading/Loading";
 
 import "./styles.css";
 
@@ -55,13 +56,13 @@ const Summary = () => {
           </div>
         );
       })
-    : "loading";
+    : <Loading className="center-loading" type="bars" width="2rem" height="2rem" />;
 
   const renderedCategoryValue = record.category_by_vendor
     ? record.category_by_vendor.map((el) => {
         return <CategoryValue key={el._id} el={el} />;
       })
-    : "loading";
+    : <Loading className="center-loading" type="bars" width="2rem" height="2rem" />;
 
   return (
     <div className="summary-container">
@@ -69,7 +70,7 @@ const Summary = () => {
         <Link to="/reports">← Back</Link>
       </div>
       <div className="summary-title">
-        <h2>{record.title && record.title}</h2>
+        <h2>{record.title ? record.title : <Loading className="center-loading" type="bars" width="2rem" height="2rem" />}</h2>
       </div>
       <div className="summary">
         <div className="summary-header">

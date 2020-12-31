@@ -5,9 +5,9 @@ import "./popup.css";
 const Popup = ({type, text, setErrorPopup, setSuccessPopup}) => {
   
   useEffect(()=> {
-    if(setErrorPopup) setTimeout(() => setErrorPopup(false), 3000);
+    if(setErrorPopup) setTimeout(() => setErrorPopup(false), 5000);
     
-    if(setSuccessPopup) setTimeout(() => setSuccessPopup(false), 3000);
+    if(setSuccessPopup) setTimeout(() => setSuccessPopup(false), 5000);
   }, [setSuccessPopup, setErrorPopup])
   
   if(type === "error" || type === "fail") {

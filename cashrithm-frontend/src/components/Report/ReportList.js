@@ -6,8 +6,10 @@ import Navbar from "../Navbar/Navbar";
 //import { AuthContext } from "../../context/AuthContext";
 import { FetchContext } from "../../context/FetchContext";
 import Popup from "../Popup/Popup";
+import Loading from "../Loading/Loading";
 
 const ReportList = () => {
+
   //const authContext = useContext(AuthContext);
   const fetchContext = useContext(FetchContext);
   const [entities, setEntities] = useState({});
@@ -49,7 +51,7 @@ const ReportList = () => {
             ? entities.transaction.map((el) => {
                 return <Report doc={el} key={el._id} />;
               })
-            : "loading..."}
+            : <Loading className="center-loading" type="spin" width="4rem" height="4rem" />}
         </div>
         <div className="records-container">
           <Link to="/add">Create New Record</Link>
@@ -71,7 +73,7 @@ const CategoryNav = ({ entities }) => {
         ? entities.category.map((el) => {
             return <SubCategoryNav key={el._id} category={el} />;
           })
-        : "loading..."}
+        : <Loading className="center-loading" type="spin" width="2rem" height="2rem" />}
     </div>
   );
 };

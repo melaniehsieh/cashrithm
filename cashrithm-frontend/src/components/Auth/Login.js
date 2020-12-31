@@ -70,11 +70,10 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button>
-        {isLoading ? (
-          <div>
-            <VscTriangleUp className="spinner" />
-            <span>Logging in...</span>
-          </div>
+        {isLoading ? (<div>
+          <VscTriangleUp className="spinner" />
+          <span>Logging in, please wait...</span>
+        </div>
         ) : (
           <span>Login</span>
         )}
@@ -87,4 +86,8 @@ const Login = () => {
   );
 };
 
+ {/*<div>
+    <VscTriangleUp className="spinner" />
+    <span>Logging in...</span>
+  </div>*/}
 export default Login;

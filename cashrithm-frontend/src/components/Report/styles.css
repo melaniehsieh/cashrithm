@@ -73,6 +73,12 @@
     text-decoration: none;
     box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
   }
+  
+  .center-loading {
+    text-align: center;
+    margin: .5rem auto;
+  }
+
 
   .record:hover,
   .records-container a:hover {
