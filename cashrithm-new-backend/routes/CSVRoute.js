@@ -5,13 +5,13 @@ const {protect, restrictTo} = require("../controllers/authController");
 
 const router = express.Router();
 
-// All route downward are protected
+// Protected route
 router.use(protect)
 
 router
   .route("/transaction")
-  .get(protect, getAllTransactionCSVDoc)
-  .delete(protect, restrictTo("admin"), deleteAllTransactionCSVDoc);
+  .get(getAllTransactionCSVDoc)
+  .delete(restrictTo("admin"), deleteAllTransactionCSVDoc);
  
 router
   .route("/category")

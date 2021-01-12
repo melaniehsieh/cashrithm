@@ -5,8 +5,8 @@ const router = express.Router();
 const {getAllUserEntities, getUserEntities, deleteUserEntities, deleteAllUserEntities, getLoggedInUserEntities, getUserRecord} = require("../controllers/entitiesController");
 const { protect, restrictTo } = require("../controllers/authController");
 
-// All route from here downward are protected
-router.use(protect);
+// Route protected
+router.use(protect)
 
 router
   .route("/user-entities")

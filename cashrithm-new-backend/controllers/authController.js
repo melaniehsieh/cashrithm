@@ -10,6 +10,17 @@ const signToken = (id) => jwt.sign({ id },  process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES
   })
 
+const sendCookies = (token, res) => {
+  const cookiesOption = {
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 60 * 60 * 1000),
+    httpOnly: true
+  };
+  
+  //if(process.env.NODE_ENV === "production") cookiesOption.secure = true;
+  
+  res.cookie("token", token, cookiesOption);
+};
+
 // signup
 exports.signup = wrapAsync(async (req, res, next) => {
   const { name, email, password, passwordConfirm, passwordChangedAt, role } = req.body;
@@ -29,15 +40,15 @@ exports.signup = wrapAsync(async (req, res, next) => {
   });
   
   const token = signToken(user._id);
-  
-  const cookiesOption = {
+  sendCookies(token, res);
+  /*const cookiesOption = {
     expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 60 * 60 * 1000),
     httpOnly: true
   };
   
-  if(process.env.NODE_ENV === "production") cookiesOption.secure = true;
+  //if(process.env.NODE_ENV === "production") cookiesOption.secure = true;
   
-  res.cookie("token", token, cookiesOption);
+  res.cookie("token", token, cookiesOption);*/
   
   const decodedToken = await jwt.verify(token, process.env.JWT_SECRET);
   user.password = undefined;
@@ -67,14 +78,15 @@ exports.login = wrapAsync(async (req, res, next) => {
   
   // If everything is OK Generate a token
   const token = signToken(user._id);
-  const cookiesOption = {
+  sendCookies(token, res);
+  /*const cookiesOption = {
     expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 60 * 60 * 1000),
     httpOnly: true
   };
   
   //if(process.env.NODE_ENV === "production") cookiesOption.secure = true;
   
-  res.cookie("token", token, cookiesOption);
+  res.cookie("token", token, cookiesOption);*/
   
   const decodedToken = await jwt.verify(token, process.env.JWT_SECRET);
   user.password = undefined;
@@ -92,7 +104,7 @@ exports.protect = wrapAsync(async (req, res, next) => {
   let token;
   if(req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
     token = req.headers.authorization.split(" ")[1];
-  } else if(req.cookies.token) {
+  } else if (req.cookies.token) {
     token = req.cookies.token;
   };
   

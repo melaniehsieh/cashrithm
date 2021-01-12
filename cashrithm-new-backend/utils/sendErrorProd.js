@@ -8,9 +8,9 @@ const sendErrorProd = (err, res) => {
   
   console.log("💥", err);
   return res.status(500).json({
-    status: "error",
-    message: `Hmm 😔, Something went very wrong. Try again`
-  });
-};
+    status: "fail",
+    message: "Hmm 😔, Something went wrong. Please try again"
+  })
+}
 
 module.exports = sendErrorProd;

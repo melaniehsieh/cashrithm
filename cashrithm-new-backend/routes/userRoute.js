@@ -8,7 +8,7 @@ const { signup, login, protect, restrictTo } = require("../controllers/authContr
 router.route("/signup").post(signup);
 router.route("/login").post(login);
 
-// All route from here downward is protected
+// Protected route
 router.use(protect);
 
 router
