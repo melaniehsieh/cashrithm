@@ -76,7 +76,7 @@ exports.deleteUserEntities = wrapAsync(async(req,  res, next) => {
 
 
 exports.deleteAllUserEntities = wrapAsync(async(req,  res, next) => {
-  const user = await Entities.deleteMany();
+  //const user = await Entities.deleteMany();
   
   res.status(204).json({
     status: "success"

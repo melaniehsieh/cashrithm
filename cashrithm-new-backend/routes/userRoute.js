@@ -8,9 +8,12 @@ const { signup, login, protect, restrictTo } = require("../controllers/authContr
 router.route("/signup").post(signup);
 router.route("/login").post(login);
 
+// All route from here downward is protected
+router.use(protect);
+
 router
   .route("/")
-  .get(protect, getAllUser)
+  .get(getAllUser)
   .post()
   .delete(deleteAllUser);
 
@@ -19,6 +22,6 @@ router
   .get(getUser)
   .post()
   .patch()
-  .delete(protect, restrictTo("admin"), deleteUser);
+  .delete(restrictTo("admin"), deleteUser);
   
 module.exports = router;

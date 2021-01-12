@@ -5,6 +5,9 @@ const {protect, restrictTo} = require("../controllers/authController");
 
 const router = express.Router();
 
+// All route downward are protected
+router.use(protect)
+
 router
   .route("/transaction")
   .get(protect, getAllTransactionCSVDoc)
@@ -12,20 +15,20 @@ router
  
 router
   .route("/category")
-  .get(protect, getAllCategoryCSVDoc)
-  .delete(protect, restrictTo("admin"), deleteAllCategoryCSVDoc);
+  .get(getAllCategoryCSVDoc)
+  .delete(restrictTo("admin"), deleteAllCategoryCSVDoc);
   
 
 router
   .route("/calc-based-select")
-  .get(protect, calcBasedOnSelect);
+  .get(calcBasedOnSelect);
 
 router
   .route("/calc-based-select-revenue")
-  .get(protect, calcBasedOnSelectRevenue);
+  .get(calcBasedOnSelectRevenue);
 
 router
   .route("/categorize-by-vendor")
-  .get(protect, categorizeByVendor);
+  .get(categorizeByVendor);
 
 module.exports = router;

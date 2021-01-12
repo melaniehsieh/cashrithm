@@ -47,7 +47,7 @@ exports.deleteUser = wrapAsync(async(req,  res, next) => {
 });
 
 exports.deleteAllUser = wrapAsync(async(req,  res, next) => {
-  const user = await User.deleteMany();
+  //const user = await User.deleteMany();
   
   res.status(204).json({
     status: "success"

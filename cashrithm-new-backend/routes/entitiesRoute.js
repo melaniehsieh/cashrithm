@@ -5,24 +5,27 @@ const router = express.Router();
 const {getAllUserEntities, getUserEntities, deleteUserEntities, deleteAllUserEntities, getLoggedInUserEntities, getUserRecord} = require("../controllers/entitiesController");
 const { protect, restrictTo } = require("../controllers/authController");
 
+// All route from here downward are protected
+router.use(protect);
+
 router
   .route("/user-entities")
-  .get(protect, getLoggedInUserEntities);
+  .get(getLoggedInUserEntities);
   
 router
   .route("/user-record/:id")
-  .get(protect, getUserRecord);
+  .get(getUserRecord);
   
 
 router
   .route("/")
   .get(getAllUserEntities)
-  .delete(protect, restrictTo("admin"), deleteAllUserEntities)
+  .delete(restrictTo("admin"), deleteAllUserEntities)
 
 router
   .route("/:id")
-  .get(protect, getUserEntities)
+  .get(getUserEntities)
   .patch()
-  .delete(protect, restrictTo("admin"), deleteUserEntities);
+  .delete(restrictTo("admin"), deleteUserEntities);
   
 module.exports = router;
