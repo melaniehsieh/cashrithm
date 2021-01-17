@@ -1,0 +1,14 @@
+h1 {
+  font: 25px "Arial-MTB";
+  color: black;
+}
+
+h4 {
+  font: 15px "Arial-MTB";
+  color: black;
+}
+
+.btn {
+  border: black 5px solid;
+  background-color: black;
+}
