@@ -1,14 +1,68 @@
+.container {
+  display: flex;
+  margin: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 50%;
+}
+
+.title_text {
+  text-align: right;
+}
+
 h1 {
-  font: 25px "Arial-MTB";
+  font: 3em "Arial-MTB";
   color: black;
+}
+
+h2 {
+  font: 2em "Arial-MTB";
+  color: white;
 }
 
 h4 {
-  font: 15px "Arial-MTB";
+  font: 1em "Arial-MTB";
   color: black;
 }
 
-.btn {
+h5 {
+  font: 1em "Arial-MTB";
+  color: white;
+}
+
+button {
+  padding: 4% 10%;
+  font: 1em "Arial-MTB";
   border: black 5px solid;
+  background-color: white;
+}
+
+button:hover {
+  color: white;
   background-color: black;
+}
+
+.page2 {
+  display: flex;
+  background-color: #00a55a;
+  padding: 5% 18%;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  color: white;
+}
+
+.screenshots {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+}
+
+.text {
+  text-align: start;
 }
