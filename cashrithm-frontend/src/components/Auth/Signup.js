@@ -37,7 +37,7 @@ const Signup = () => {
       setSuccessPopup(true);
       setTimeout(() => setRedirectOnSuccess(true), 1500);
     } catch (e) {
-      console.log(e);
+      //console.log(e);
       setErrorPopup(true);
       setIsLoading(false);
       setErrorMessage(e.response.data.message);

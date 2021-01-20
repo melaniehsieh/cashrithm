@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, createContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FetchContext } from "../../../context/FetchContext";
 import Loading from "../../Loading/Loading";
@@ -6,12 +6,12 @@ import Loading from "../../Loading/Loading";
 import "./styles.css";
 
 const Summary = () => {
-  console.log(useParams());
+  //console.log(useParams());
   const { id } = useParams();
   const fetchContext = useContext(FetchContext);
   const [record, setRecord] = useState([]);
   //const [category, setCategory] = useState([]);
-  const [error, setError] = useState("");
+  //const [error, setError] = useState("");
   //const [categoryError, setCategoryError] = useState("");
 
   const getRecord = async () => {
@@ -22,8 +22,8 @@ const Summary = () => {
       setRecord(data.record);
       //console.log(data);
     } catch (e) {
-      setError(e.response.data.message);
-      console.log(e);
+      //setError(e.response.data.message);
+      //console.log(e);
     }
   };
 
@@ -44,8 +44,8 @@ const Summary = () => {
     getRecord();
     //getCategory();
   }, []);
-  console.log(record);
-  console.log(record.total_doc_by_option);
+  //console.log(record);
+  //console.log(record.total_doc_by_option);
 
   const renderedOption = record.total_doc_by_option
     ? record.total_doc_by_option.map((el) => {

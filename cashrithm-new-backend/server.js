@@ -11,10 +11,11 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 
-const uploadcsvRouter = require("./routes/uploadcsvRoute");
-const csvRouter = require("./routes/csvRoute");
+const uploadcsvRouter = require("./routes/uploadCSVRoute");
+const csvRouter = require("./routes/CSVRoute");
 const userRouter = require("./routes/userRoute");
 const entitiesRouter = require("./routes/entitiesRoute");
+const documentation = require("./utils/documentation.json");
 
 const expressErrorHandlingMiddleware = require("./controllers/expressErrorHandlingMiddleware");
 const ThrowError = require("./utils/ThrowError");
@@ -25,7 +26,7 @@ const app = express();
 
 app.enable('trust proxy');
 
-// Cross origin
+// Cross origin o
 app.use(cors());
 
 // Setting http headers
@@ -70,6 +71,7 @@ if(process.env.NODE_ENV === "development") app.use(morgan('dev'));
 
 // Test middleware
 app.use((req, res, next) => {
+  //console.log(req.ip);
   //console.log(req.headers);
   /*console.log("req");
   console.log(req);
@@ -94,8 +96,8 @@ const main = async () => {
       .replace('<password>', process.env.DB_PASS)
       .replace('<dbname>', process.env.DB_NAME);
   } else {
-    console.log(colors.red('Are you sure the .env file exists and have the correct information?'));
-    throw new Error('Invalid or inexistent environment file');
+    //console.log(colors.red('Are you sure the .env file exists and have the correct information?'));
+    //throw new Error('Invalid or inexistent environment file');
   }
 
   await mongoose.connect(CONNECTION_STRING, {
@@ -109,6 +111,14 @@ const main = async () => {
   });
 };
 main();
+
+// 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Cashrithm v1.0 API",
+    routes: documentation
+  });
+});
 
 // MOUNTING ROUTES
 app.use("/api/v1/upload-csv", uploadcsvRouter);

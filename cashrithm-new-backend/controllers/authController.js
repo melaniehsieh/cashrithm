@@ -16,7 +16,7 @@ const sendCookies = (token, res) => {
     httpOnly: true
   };
   
-  //if(process.env.NODE_ENV === "production") cookiesOption.secure = true;
+  if(process.env.NODE_ENV === "production") cookiesOption.secure = true;
   
   res.cookie("token", token, cookiesOption);
 };

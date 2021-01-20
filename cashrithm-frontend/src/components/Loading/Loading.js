@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactLoading from "react-loading";
 
-const style = {
+/*const style = {
   display: "grid",
   gridTemplateColumns: "30% 80%",
   alignContent: "center",
   justifyContent: "center"
-};
+};*/
 
 const Loading = ({type, height, className, width}) => {
   return (

@@ -31,7 +31,7 @@ const Login = () => {
       setSuccessPopup(true);
       setTimeout(() => setRedirectOnSuccess(true), 1500);
     } catch (e) {
-      console.log(e);
+      //console.log(e);
       setErrorMessage(e.response.data.message);
       setErrorPopup(true);
       setIsLoading(false);
@@ -85,9 +85,4 @@ const Login = () => {
     </form>
   );
 };
-
- {/*<div>
-    <VscTriangleUp className="spinner" />
-    <span>Logging in...</span>
-  </div>*/}
 export default Login;

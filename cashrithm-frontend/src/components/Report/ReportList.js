@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./styles.css";
 import Report from "./Report";
 import Navbar from "../Navbar/Navbar";
@@ -25,7 +25,7 @@ const ReportList = () => {
     } catch (e) {
       setErrorPopup(true);
       setEntitiesError(e.response.data.message);
-      console.log(e);
+      //console.log(e);
     }
   };
 

@@ -1,0 +1,109 @@
+[33mcommit 6a7c2784094af27b07b7b5698b3f4bac7b42e0eb[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Merge: edf6fec 5f020c4
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Tue Jan 12 19:17:50 2021 +0100
+
+    Initial Commit
+
+[33mcommit edf6fec517fa6094e465e7f7a267f9996ae9ef25[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Tue Jan 12 15:10:38 2021 +0100
+
+    Preparing for production
+
+[33mcommit 30380c1e8334a74893a143f04408baf781e666e1[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Tue Jan 12 13:33:49 2021 +0100
+
+    Preparing for heroku deployement
+
+[33mcommit 5f020c49a2ccb87668719f84d1cfe25751b50401[m
+Author: Melanie Hsieh <61959712+melaniehsieh@users.noreply.github.com>
+Date:   Fri Jan 8 19:18:57 2021 +0800
+
+    Add files
+
+[33mcommit 8fd1814eb4713deaa65102a139948e6f63b9ba76[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Thu Dec 31 13:42:21 2020 +0100
+
+    Adding react loading
+
+[33mcommit e1e24b35b7e95c9f1efbd44b6991b9204629cce4[m
+Author: melaniehsieh <mpwh2004@gmail.com>
+Date:   Thu Dec 31 15:07:03 2020 +0800
+
+    updated style
+
+[33mcommit de2e4bdc89951b6a19618810494ef3c2f229d778[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Wed Dec 30 13:17:19 2020 +0100
+
+    Integarte the changes from backend
+
+[33mcommit eb67e2cc13f9ff8b4d81178dd9302ab3e11a3df9[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Tue Dec 29 15:09:37 2020 +0100
+
+    Add some changes to csv controller
+
+[33mcommit c25018cd019584cc730018cbbc37098e02508fe9[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Fri Dec 18 11:37:12 2020 +0100
+
+    updated report list style
+
+[33mcommit e25d192f7667f8342c3f879fc3b2c89a4eff9fc4[m
+Merge: c4bed3d 018f58f
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Fri Dec 18 11:23:22 2020 +0100
+
+    updated report list style
+
+[33mcommit c4bed3d5be340638e9a01c74fca21948a172d3a6[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Fri Dec 18 11:11:53 2020 +0100
+
+    Updated report list style
+
+[33mcommit 018f58f26fd18939020b794442e2b54d821aa632[m
+Author: melaniehsieh <mpwh2004@gmail.com>
+Date:   Thu Dec 17 11:23:51 2020 +0800
+
+    updated report style
+
+[33mcommit 1d18537f1749c2a2dbf254ae59624a1d98e94f7e[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Sun Dec 13 16:51:56 2020 +0100
+
+    Integrate add record and category
+
+[33mcommit 76ff071369055f3ecd9730d1b693874a5860406e[m
+Author: melaniehsieh <mpwh2004@gmail.com>
+Date:   Fri Dec 11 21:37:34 2020 +0800
+
+    updated summary
+
+[33mcommit 7aa18d5feab1ccd282e1d92ac019ab81e0eba5eb[m
+Author: melaniehsieh <mpwh2004@gmail.com>
+Date:   Fri Dec 11 12:18:08 2020 +0800
+
+    updated add report category page
+
+[33mcommit f64c8948d3720bb203f53e64f83d15cef61f6213[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Thu Dec 10 14:49:18 2020 +0100
+
+    small changes
+
+[33mcommit 6549bbb6a2db088b0c4886e5c2217cc500bc0afc[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Wed Dec 9 07:03:44 2020 +0100
+
+    make changes
+
+[33mcommit dc2f4b56df31a54e28043cf86f1f60de6f2b452a[m
+Author: Fasasi Toheeb <tohebayomide11@gmail.com>
+Date:   Thu Dec 3 13:25:12 2020 +0100
+
+    Initial Commit

@@ -6,13 +6,14 @@ const neatCsv = require('neat-csv');
 const { promisify } = require("util");
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const fromEntries = require("object.fromentries");
 
 const CSV = require("../model/csvModel");
 const Entities = require("../model/entitiesModel");
 const CategoryCSV = require("../model/categoryModel");
 const ThrowError = require("../utils/ThrowError");
 const wrapAsync = require("../utils/wrapAsync");
-const {checkGreaterThan} = require("../utils/helper");
+//const {checkGreaterThan} = require("../utils/helper");
 
 
 // Multer Configuration
@@ -22,7 +23,8 @@ const multerStorage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = file.mimetype.split("/")[1];
-    cb(null, `user-${Date.now()}.${ext}`);
+    //cb(null, `user-${Date.now()}.${ext}`);
+    cb(null, `user-${Date.now()}.csv`);
   }
 });
 
@@ -48,7 +50,7 @@ exports.uploadCSV = upload.single('csv');
 // Transform transaction file
 const transformedData = (data, type) => {
   return data.map((el) => {
-    return Object.fromEntries(
+    return fromEntries(
       Object.entries(el).map(([key, value]) => {
         //key = "type";
         if(key === "_id") {
@@ -152,7 +154,7 @@ const differenceTotalRevenueExpenseByVendor = async (userId, csvId) => {
 // Transform transaction file of options
 const transformedGroupedOptionData = (data) => {
   return data.map((el) => {
-    return Object.fromEntries(
+    return fromEntries(
       Object.entries(el).map(([key, value]) => {
         //key = "type";
         if(key === "_id") {
@@ -204,10 +206,10 @@ const calcAndUpdateCurrentCategory = wrapAsync(async (req) => {
         vendors: { $addToSet: "$vendor" }
       } }
     ]);
-     console.log(data);
+     //console.log(data);
      // Transformed the data by setting the "_id" property to "type"
     const transformedData = data.map((el) => {
-      return Object.fromEntries(
+      return fromEntries(
         Object.entries(el).map(([key, value]) => {
           //key = "type";
           if(key === "_id") {
@@ -234,7 +236,7 @@ const calcAndUpdateCurrentCategory = wrapAsync(async (req) => {
 // Used to transform all total revenue and expense without grouping
 const transformDataFunc = (data) => {
   return data.map((el) => {
-    return Object.fromEntries(
+    return fromEntries(
       Object.entries(el).map(([key, value]) => {
         //key = "type";
         if(key === "_id") {
@@ -281,7 +283,7 @@ const calculateAllTotalRevenueExpense = async (req, csvId) => {
 
 // Transform transaction document
 const transformTransactionDoc = (el, req, num) => {
-  const transformedData = Object.fromEntries(
+  const transformedData = fromEntries(
     Object.entries(el).map(([key, value]) => {
       return [key.toLowerCase(), value];
     })
@@ -303,6 +305,19 @@ const transformTransactionDoc = (el, req, num) => {
   return transformedData;
 };
 
+const objectToLowerCase = (parsedData) => {
+  return parsedData.map(el => {
+    return fromEntries(Object.entries(el).map(([key, value]) => {
+      return [key.toLowerCase(), value];
+      })
+    );
+  });
+  /*
+  return fromEntries(Object.entries(parsedData[0]).map(([key, value]) => {
+    return [key.toLowerCase(), value];
+  }));*/
+}
+
 // Beginning of uploading transaction file
 exports.uploadTransactionCsv = wrapAsync(async (req, res, next) => {
     if(!req.file) {
@@ -323,6 +338,14 @@ exports.uploadTransactionCsv = wrapAsync(async (req, res, next) => {
     // Parsing and Processing the csv file
     let data = await fs.readFile(path.join(req.file.path));
     let parsedData = await neatCsv(data);
+    
+    // Check for the property required in the transaction file
+    const dataLower = objectToLowerCase(parsedData)
+    console.log(dataLower);
+ 
+    if(!dataLower[0].date && !dataLower[0].vendor && !dataLower[0].amount && !dataLower[0].select && !dataLower[0].option) {
+      return next(new ThrowError(400, "Please, check your transaction csv file, we only need the field of 'date', 'vendor', 'amount', 'select' and 'option'."))
+    }
     
     // Looping through the passed array and processing
     const newParsedData = parsedData.map((el) => {
@@ -395,10 +418,18 @@ exports.uploadCategoryCsv = wrapAsync(async (req, res, next) => {
     let data = await fs.readFile(path.join(req.file.path));
     let parsedData = await neatCsv(data);
     
+    // Check for the property of TYPE and VENDOR
+    const dataLower = objectToLowerCase(parsedData);
+    
+    if(!dataLower[0].type && !dataLower[0].vendor) {
+      return next(new ThrowError(400, "Please, check your category csv file, we only need the field of 'Type' and 'Vendor'."))
+    }
+      
     //  Convert the Amount value to number
     const newParsedData = parsedData.map((el) => {
+
       // Transform the uploaded data
-      const transformedData = Object.fromEntries(
+      const transformedData = fromEntries(
         Object.entries(el).map(([key, value]) => {
           
           return [key.toLowerCase(), value];
@@ -429,7 +460,7 @@ exports.uploadCategoryCsv = wrapAsync(async (req, res, next) => {
     // Calculate and update current user entities
     await calcAndUpdateCurrentCategory(req);
     
-    console.log(oldData);
+    //console.log(oldData);
     
     // Insert all the csv file parsed
     const doc = await CategoryCSV.insertMany(newParsedData);
@@ -540,7 +571,7 @@ exports.calcBasedOnSelectRevenue = wrapAsync(async (req, res, next) => {
      
      // Transformed the data by setting the "_id" property to "type"
     const transformedData = data.map((el) => {
-      return Object.fromEntries(
+      return fromEntries(
         Object.entries(el).map(([key, value]) => {
           //key = "type";
           if(key === "_id") {

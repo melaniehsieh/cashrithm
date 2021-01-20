@@ -8,7 +8,7 @@ const Landing = () => {
   return (
     <div>
       <div className="container">
-        <img src={summary} alt="title image" />
+        <img src={summary} alt="title" />
         <div className="title_text">
           <h1>
             discover the <br /> experience

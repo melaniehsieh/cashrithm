@@ -1,0 +1,111 @@
+{
+  "/api/v1/upload-csv": {
+    "/transaction": {
+      "method": "POST",
+      "description": "User upload there TRANSACTION csv file, through this endpoint."
+    },
+    "/category": {
+      "method": "POST",
+      "description": "User upload there CATEGORY csv file, through this endpoint."
+    }
+  },
+  "/api/v1/csv": {
+    "/transaction": [
+      {
+      "method": "GET",
+      "description": "This endpoint get all the uploaded transaction csv file.",
+      "authentication": true
+    },
+    {
+      "method": "DELETE",
+      "description": "This endpoint delete all the uploaded transaction csv file.",
+      "authentication": true,
+      "admin": true
+    }],
+    "/category": [
+      {
+      "method": "GET",
+      "description": "This endpoint get all the uploaded category csv file.",
+      "authentication": true
+    },
+    {
+      "method": "DELETE",
+      "description": "This endpoint delete all the uploaded category csv file.",
+      "authentication": true,
+      "admin": true
+    }]
+  },
+  "/api/v1/user": {
+    "/signup": {
+      "method": "POST",
+      "description": "User create an account from this endpoint."
+    },
+    "/login": {
+      "method": "POST",
+      "description": "User log into the application from this endpoint."
+    },
+    "/": [
+      {
+        "method": "GET",
+        "description": "List of all users.",
+        "authentication": true
+      },
+      {
+        "method": "DELETE",
+        "description": "Delete all available users.",
+        "authentication": true
+      }
+    ],
+    "/:id": [
+      {
+        "method": "GET",
+        "description": "Get a single user.",
+        "authentication": true
+      },
+      {
+        "method": "DELETE",
+        "description": "Delete a single user.",
+        "authentication": true,
+        "admin": true
+      }
+    ]
+  },
+  "/api/v1/entities": {
+    "/user-entities": {
+      "method": "GET",
+      "description": "Get logged in user entities object.",
+      "authentication": true
+    },
+    "/user-record/:id": {
+      "method": "GET",
+      "description": "Get user entities object by passing in the id.",
+      "authentication": true
+    },
+    "/": [
+      {
+        "method": "GET",
+        "description": "Get all user Entities available.",
+        "authentication": true
+      },
+      {
+        "method": "DELETE",
+        "description": "Delete all user Entities available.",
+        "authentication": true,
+        "admin": true
+      }
+    ],
+    "/:id": [
+      {
+        "method": "GET",
+        "description": "Get a single user Entities.",
+        "authentication": true
+      },
+      {
+        "method": "DELETE",
+        "description": "Delete a single user Entities.",
+        "authentication": true,
+        "admin": true
+      }
+    ]
+  }
+}
