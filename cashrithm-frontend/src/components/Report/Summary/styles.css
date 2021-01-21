@@ -32,6 +32,7 @@
   .summary-title {
     width: 100%;
     font: 1rem "Futura";
+    color: black;
   }
 
   .summary-header {
@@ -138,6 +139,7 @@
 
   .summary-title {
     font: 1rem "Futura";
+    color: black;
   }
 
   .summary-container a:hover {
