@@ -51,8 +51,8 @@ const Summary = () => {
     ? record.total_doc_by_option.map((el) => {
         return (
           <div className="summary-content-text" key={el._id}>
-            <p>{el.option[0].toUpperCase() + el.option.substring(1)}</p>
-            <p>{el.total_by_option}</p>
+            <p className="t">{el.option[0].toUpperCase() + el.option.substring(1)}</p>
+            <p className="y">{el.total_by_option}</p>
           </div>
         );
       })
@@ -69,26 +69,7 @@ const Summary = () => {
       <div className="back">
         <Link to="/reports">← Back</Link>
       </div>
-      <div className="summary-title">
-        <h2>{record.title ? record.title : <Loading className="center-loading" type="bars" width="2rem" height="2rem" />}</h2>
-      </div>
-      <div className="summary">
-        <div className="summary-header">
-          <h4>All Branch Values</h4>
-          <h4>Amount($)</h4>
-        </div>
-        <div className="summary-content">{renderedOption}</div>
-      </div>
-
-      <div className="summary">
-        <div className="summary-header">
-          <h4>Category</h4>
-          <h4>Amount($)</h4>
-        </div>
-        <div className="summary-content">{renderedCategoryValue}</div>
-      </div>
-
-      {/*<div className="summary">
+      <div className="summary-heade">
         <h4>All Branch Values</h4>
         <h4>Amount($)</h4>
       </div>

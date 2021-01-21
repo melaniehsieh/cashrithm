@@ -112,22 +112,24 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: #f0f0f0;
-    padding: 2em;
+    padding: 2em 1em;
   }
 
   .report {
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    /*grid-gap: 1rem;*/
     overflow: hidden;
+    margin: 0 0 1rem 0;
+    width: 95%;
   }
 
   .record h2 {
-    font: 30px "Futura";
+    font: 20px "Futura";
   }
 
   .record p {
-    font: 20px "Futura";
+    font: 10px "Futura";
   }
 
   .record p span {
@@ -135,11 +137,11 @@
   }
 
   .record {
-    width: fit-content;
-    height: fit-content;
+    /*width: fit-content;
+    height: fit-content;*/
     background-color: white;
     border-radius: 10px;
-    padding: 1rem 2rem;
+    padding: 1rem;
     margin: 1rem;
     cursor: pointer;
     box-shadow: 6px 6px 12px 0 rgba(0, 0, 0, 16%);
@@ -160,7 +162,7 @@
   }
 
   .records-container {
-    width: 90%;
+    width: 100%;
   }
 
   .records-container a {

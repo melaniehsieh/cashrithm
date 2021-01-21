@@ -1,0 +1,5 @@
+production
+"proxy": "https://cashrithm.herokuapp.com"
+
+/api/*  https://cashrithm.herokuapp.com/api/:splat  200
+/*    /index.html   200

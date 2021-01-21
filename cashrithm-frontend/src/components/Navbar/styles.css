@@ -52,3 +52,45 @@ nav {
   justify-content: start;
   align-content: center;
 }
+
+@media screen and (max-width: 768px) {
+  nav {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    background: white;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1% 15%;
+    height: 3rem;
+  }
+  .user__nav {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border-radius: 1rem;
+    align-content: center;
+    justify-content: center;
+    box-shadow: 3px 3px 15px 0 rgba(0, 0, 0, 16%);
+    height: 2rem;
+  }
+  
+  .user__name {
+    border-radius: 1rem;
+    padding: 1rem;
+    font: 15px "Futura";
+  }
+  
+  .btn {
+    border: none;
+    background: none;
+    height: 2rem;
+    margin: auto;
+    width: 4rem;
+  }
+  
+  .btn__logout {
+    font: 10px "Futura";
+    background: rgba(0, 0, 0, 16%);
+    border-radius: 1rem;
+  }
+}

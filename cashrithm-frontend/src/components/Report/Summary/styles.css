@@ -3,11 +3,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
     background-color: #ffffff;
     min-height: 100vh;
-    width: 80%;
-    margin: 0 auto;
+    width: 95%;
+    margin: 0 auto 2rem;
   }
 
   .summary-container .back {
@@ -36,12 +35,19 @@
   }
 
   .summary-header {
-    flex-direction: row;
-    flex: 1 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 95%;
+    margin: 1rem auto 0;
+  }
+  
+  .center-loading {
+    text-align: center;
+    margin: .5rem auto;
   }
 
   .summary {
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     font: 1em "Futura";
@@ -51,6 +57,54 @@
     display: flex;
     flex-direction: column;
     font: 1em "Futura";
+  }
+  
+  .summary-content {
+    margin: 0 auto;
+    width: 90%;
+  }
+  
+  .summary-content-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+  
+  .t {
+    display: grid;
+    justify-content: start;
+  }
+  
+  .y {
+    display: grid;
+    justify-content: end;
+  }
+  
+  
+  .summary-content-text p:nth-child(1) {
+    justify-self: start;
+    text-align: left;
+  }
+  
+  .summary-content-text p:nth-child(2) {
+    justify-self: end;
+    text-align: right;
+  }
+  
+  .sub-summary {
+    width: 90%;
+    color: gray;
+    margin: 0 auto;
+    font-size: .8rem;
+  }
+  
+  .sub-summary-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .summary-title {
+    font: 1rem "Futura";
   }
 }
 
@@ -91,8 +145,8 @@
   }
 
   .summary-header {
-    flex-direction: row;
-    flex: 1 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
   .summary {
@@ -102,18 +156,20 @@
     margin: 0 0 5rem 0;
   }
 
-  .summary-header {
+  /*.summary-header {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     text-align: left;
-  }
+  }*/
 
   .summary-header h4:nth-child(2) {
     text-align: right;
   }
 
   .summary-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
   }
 
