@@ -69,7 +69,7 @@ const Summary = () => {
       <div className="back">
         <Link to="/reports">← Back</Link>
       </div>
-      <div className="summary-heade">
+      <div className="summary-header">
         <h4>All Branch Values</h4>
         <h4>Amount($)</h4>
       </div>
