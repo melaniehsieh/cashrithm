@@ -106,7 +106,7 @@
     text-align: left;
   }
   
-  h5{
+  h2, h5{
     color: black;
   }
 }
@@ -219,7 +219,7 @@
     text-align: left;
   }
   
-    h5{
+    h2, h5{
     color: black;
   }
 }
