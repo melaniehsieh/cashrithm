@@ -69,12 +69,24 @@ const Summary = () => {
       <div className="back">
         <Link to="/reports">← Back</Link>
       </div>
-      <div className="summary-heade">
+      <div className="summary-header">
         <h4>All Branch Values</h4>
         <h4>Amount($)</h4>
       </div>
-
       <div className="summary">
+        {renderedOption}
+      </div>
+      
+      <div className="summary-header">
+        <h4>Category</h4>
+        <h4>Amount($)</h4>
+      </div>
+      <div className="summary">
+        {renderedCategoryValue}
+      </div>
+      
+
+      {/*<div className="summary">
         <div className="left">
           <p>Gross Profit</p>
           <p>Operating Expense</p>
