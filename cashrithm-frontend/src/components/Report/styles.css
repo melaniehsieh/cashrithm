@@ -95,6 +95,7 @@
     padding: 0 0 0 2rem;
     margin: 0.8rem 0;
     font: 20px "Futura";
+    color: black;
   }
 
   .category__vendor {
@@ -103,6 +104,10 @@
     font: 18px "Futura";
     color: #707070;
     text-align: left;
+  }
+  
+  h2, h5{
+    color: black;
   }
 }
 
@@ -203,6 +208,7 @@
     padding: 0 0 0 2rem;
     margin: 0.8rem 0;
     font: 20px "Futura";
+    color: black;
   }
 
   .category__vendor {
@@ -211,5 +217,9 @@
     font: 18px "Futura";
     color: #707070;
     text-align: left;
+  }
+  
+    h2, h5{
+    color: black;
   }
 }
